@@ -1,0 +1,26 @@
+{
+  "terrain": {
+    "id": "repo01",
+    "title": "creative repo",
+    "version": "1.0",
+    "startNode": "0.0",
+    "mediaBase": "https://media.matthewsigmon.com/repo",
+    "mode": "public"
+  },
+  "nodes": [
+    {
+      "id": "0.0",
+      "title": "Home",
+      "type": "destination",
+      "audio": {
+        "aux1": "https://media.matthewsigmon.com/assets/audio/aux/094472-aux.mp3"
+      },
+      "transition": {},
+      "visuals": [],
+      "choices": [],
+      "interruptible": [],
+      "links": [],
+      "tags": []
+    }
+  ]
+}
