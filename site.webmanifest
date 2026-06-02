@@ -1,0 +1,24 @@
+{
+  "name": "Sigmon - A Set of Something",
+  "short_name": "Sigmon",
+  "description": "Multipath Publishing Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#191919",
+  "theme_color": "#191919",
+  "icons": [
+    {
+      "src": "assets/images/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

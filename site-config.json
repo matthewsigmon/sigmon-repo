@@ -1,0 +1,15 @@
+{
+  "title": "Sigmon - Creative Repository",
+  "pwaTitle": "Repo",
+  "themeColor": "#15161a",
+  "mode": "public",
+  "bootSequence": "instant",
+  "startImage": "https://media.matthewsigmon.com/repo/assets/images/start.jpg",
+  "css": {
+    "--accent-primary": "#00FFF6",
+    "--accent-primary-hover": "#D8EB4A",
+    "--accent-primary-glow": "rgba(206, 226, 50, 0.4)",
+    "--progress-fill": "#a8abb2",
+    "--link-hover-accent": "#c8ccd2"
+  }
+}

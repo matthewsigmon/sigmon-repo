@@ -1,0 +1,15 @@
+{
+  "title": "Sigmon - A Set of Something",
+  "pwaTitle": "Terrain",
+  "themeColor": "#15161a",
+  "mode": "public",
+  "bootSequence": "instant",
+  "startImage": "assets/images/start.jpg",
+  "css": {
+    "--accent-primary": "#E6E6E6",
+    "--accent-primary-hover": "#FFFFFF",
+    "--accent-primary-glow": "rgba(230, 230, 230, 0.35)",
+    "--progress-fill": "#a8abb2",
+    "--link-hover-accent": "#c8ccd2"
+  }
+}
