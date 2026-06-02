@@ -16,7 +16,14 @@
         "aux1": "https://media.matthewsigmon.com/assets/audio/aux/094472-aux.mp3"
       },
       "transition": {},
-      "visuals": [],
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/0.0.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
       "choices": [],
       "interruptible": [],
       "links": [],
