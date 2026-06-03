@@ -2274,10 +2274,7 @@
                 </div>
 
                 <!-- Links Area -->
-                <div class="links-area" id="linksArea">
-                    <a href="https://repo.matthewsigmon.com/#" class="external-link" style="display:none;"></a>
-                    <a href="https://repo.matthewsigmon.com/#" class="support-link">Support this project</a>
-                </div>
+                <div class="links-area" id="linksArea"></div>
             </div>
         </div>
     </div>
@@ -5405,8 +5402,6 @@
         }
 
         function updateLinks(links) {
-            // Clear existing links except support
-            const supportLink = linksArea.querySelector('.support-link');
             linksArea.innerHTML = '';
 
             // Text overlay button first
@@ -5463,9 +5458,6 @@
                 linksArea.appendChild(shareEl);
                 }
             }
-            
-            // Re-add support link
-            linksArea.appendChild(supportLink);
         }
 
         function copyShareLink(el, url) {
