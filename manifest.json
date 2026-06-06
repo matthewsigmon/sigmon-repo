@@ -516,7 +516,7 @@
       "title": "Track 2 -  It Rained All Day",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/02-It-Rained-All-Day.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/02-It-Rained-All-Day.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -537,7 +537,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.2.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.2.jpg",
           "start": 0,
           "duration": 0
         }
@@ -643,7 +643,7 @@
       "title": "Track 3 - Coffee Steam Dreams",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/03-Coffee-Steam-Dreams.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/03-Coffee-Steam-Dreams.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -664,7 +664,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.3.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.3.jpg",
           "start": 0,
           "duration": 0
         }
@@ -770,7 +770,7 @@
       "title": "Track 4 - Will the Sun Remember Us?",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/04-Will-the-Sun-Remember-Us.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/04-Will-the-Sun-Remember-Us.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -791,7 +791,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.4.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.4.jpg",
           "start": 0,
           "duration": 0
         }
@@ -897,7 +897,7 @@
       "title": "Track 5 - Our Own Little World",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/05-Our-Own-Little-World.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/05-Our-Own-Little-World.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -918,7 +918,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.5.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.5.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1024,7 +1024,7 @@
       "title": "Track 6 - Something for Jem",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/06-Something-for-Jem.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/06-Something-for-Jem.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -1045,7 +1045,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.6.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.6.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1151,7 +1151,7 @@
       "title": "Track 7 - Never More Than Now",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/07-Never-More-Than-Now.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/07-Never-More-Than-Now.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -1172,7 +1172,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.7.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.7.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1278,7 +1278,7 @@
       "title": "Track 8 - Misty Blue Avenue",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/08-Misty-Blue-Avenue.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/08-Misty-Blue-Avenue.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -1299,7 +1299,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.8.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.8.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1405,7 +1405,7 @@
       "title": "Track 9 - The Things That We Could Do",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/09-The-Things-That-We-Could-Do.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/09-The-Things-That-We-Could-Do.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -1426,7 +1426,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.9.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.9.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1532,7 +1532,7 @@
       "title": "Track 10 - In and Out of Dreams",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/10-In-and-Out-of-Dreams.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/10-In-and-Out-of-Dreams.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -1553,7 +1553,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.10.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.10.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1659,7 +1659,7 @@
       "title": "Track 11 -  Everywhere We Go",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/11-Everywhere-We-Go.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/11-Everywhere-We-Go.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -1680,7 +1680,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.11.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.11.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1786,7 +1786,7 @@
       "title": "Track 12 - This Ordinary Magic",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/12-This-Ordinary-Magic.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/12-This-Ordinary-Magic.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -1807,7 +1807,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.12.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.12.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1913,7 +1913,7 @@
       "title": "Track 13 - One Lucky Lifetime",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/13-One-Lucky-Lifetime.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/13-One-Lucky-Lifetime.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -1934,7 +1934,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.13.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.13.jpg",
           "start": 0,
           "duration": 0
         }
@@ -2040,7 +2040,7 @@
       "title": "Track 14 - Kitchen Candlelight",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/14-Kitchen-Candlelight.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/14-Kitchen-Candlelight.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -2061,7 +2061,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.14.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.14.jpg",
           "start": 0,
           "duration": 0
         }
@@ -2167,7 +2167,7 @@
       "title": "Track 15 - Never Found the Words",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/15-Never-Found-the-Words.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/15-Never-Found-the-Words.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -2188,7 +2188,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.15.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.15.jpg",
           "start": 0,
           "duration": 0
         }
@@ -2294,7 +2294,7 @@
       "title": "Track 16 - The Turn We're Taking",
       "type": "connection",
       "audio": {
-        "primary": "assets/audio/playlists/irad/16-The-Turn-We're-Taking.mp3"
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/16-The-Turn-We're-Taking.mp3"
       },
       "transition": {
         "type": "bundle",
@@ -2315,7 +2315,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "assets/images/nodes/1.2/1.210.16.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.16.jpg",
           "start": 0,
           "duration": 0
         }
