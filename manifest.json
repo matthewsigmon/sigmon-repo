@@ -62,8 +62,7 @@
             "assets/images/nodes/000.0/check-back-1.jpg",
             "assets/images/nodes/000.0/check-back-2.jpg",
             "assets/images/nodes/000.0/check-back-3.jpg",
-            "assets/images/nodes/000.0/check-back-4.jpg",
-            "assets/images/nodes/000.0/check-back-5.jpg"
+            "assets/images/nodes/000.0/check-back-4.jpg"
           ],
           "mode": "random_tracked",
           "start": 0,
