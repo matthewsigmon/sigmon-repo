@@ -36,7 +36,7 @@
       "title": "Check back soon!",
       "type": "connection",
       "audio": {
-        "aux1": "assets/audio/aux/122243-aux.mp3",
+        "aux1": "https://media.matthewsigmon.com/assets/audio/aux/122243-aux.mp3",
         "aux1Crossfade": 9000
       },
       "transition": {
