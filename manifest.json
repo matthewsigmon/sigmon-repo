@@ -30,6 +30,2391 @@
       "tags": [],
       "textTitle": "IMPORTANT!",
       "text": "Have a nice day. \n\nOR ELSE."
+    },
+    {
+      "id": "000.0",
+      "title": "Check back soon!",
+      "type": "connection",
+      "audio": {
+        "aux1": "assets/audio/aux/122243-aux.mp3",
+        "aux1Crossfade": 9000
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image_bundle",
+          "files": [
+            "assets/images/nodes/000.0/check-back-1.jpg",
+            "assets/images/nodes/000.0/check-back-2.jpg",
+            "assets/images/nodes/000.0/check-back-3.jpg",
+            "assets/images/nodes/000.0/check-back-4.jpg",
+            "assets/images/nodes/000.0/check-back-5.jpg"
+          ],
+          "mode": "random_tracked",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [],
+      "interruptible": [],
+      "links": [],
+      "tags": [],
+      "imageAutoAdvance": 7000
+    },
+    {
+      "id": "1.20",
+      "title": "It Rained All Day - options",
+      "type": "connection",
+      "audio": {
+        "aux1Crossfade": 8000,
+        "aux1": "assets/audio/aux/rain-fx.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "video",
+          "src": "https://media.matthewsigmon.com/assets/video/1.20/1.20.mp4",
+          "start": 0,
+          "duration": 0,
+          "persist": true,
+          "loop": true
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "It Rained All Day - Listen",
+          "target": "1.21"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day - Backstory",
+          "target": "000.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.21",
+      "title": "Track 1 - Let's Sleep In (Copy)",
+      "type": "connection",
+      "audio": {
+        "aux1": "assets/audio/aux/rain-fx.mp3",
+        "aux1Crossfade": 8000
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "video",
+          "src": "https://media.matthewsigmon.com/assets/video/1.20/1.21.mp4",
+          "start": 0,
+          "duration": 0,
+          "persist": true,
+          "loop": true
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.0",
+      "title": "It Rained All Day - playlist",
+      "type": "connection",
+      "audio": {
+        "type": "playlist",
+        "source": "https://media.matthewsigmon.com/assets/audio/playlists/irad/it-rained-all-day.m3u"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.0.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.1",
+      "title": "Track 1 - Let's Sleep In",
+      "type": "connection",
+      "audio": {
+        "primary": "https://media.matthewsigmon.com/assets/audio/playlists/irad/01-Let's-Sleep-In.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.1.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.2",
+      "title": "Track 2 -  It Rained All Day",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/02-It-Rained-All-Day.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.2.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.3",
+      "title": "Track 3 - Coffee Steam Dreams",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/03-Coffee-Steam-Dreams.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.3.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.4",
+      "title": "Track 4 - Will the Sun Remember Us?",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/04-Will-the-Sun-Remember-Us.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.4.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "*0",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.5",
+      "title": "Track 5 - Our Own Little World",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/05-Our-Own-Little-World.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.5.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.6",
+      "title": "Track 6 - Something for Jem",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/06-Something-for-Jem.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.6.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.7",
+      "title": "Track 7 - Never More Than Now",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/07-Never-More-Than-Now.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.7.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.8",
+      "title": "Track 8 - Misty Blue Avenue",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/08-Misty-Blue-Avenue.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.8.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.9",
+      "title": "Track 9 - The Things That We Could Do",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/09-The-Things-That-We-Could-Do.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.9.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.10",
+      "title": "Track 10 - In and Out of Dreams",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/10-In-and-Out-of-Dreams.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.10.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.11",
+      "title": "Track 11 -  Everywhere We Go",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/11-Everywhere-We-Go.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.11.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.12",
+      "title": "Track 12 - This Ordinary Magic",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/12-This-Ordinary-Magic.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.12.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.13",
+      "title": "Track 13 - One Lucky Lifetime",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/13-One-Lucky-Lifetime.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.13.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.14",
+      "title": "Track 14 - Kitchen Candlelight",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/14-Kitchen-Candlelight.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.14.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.15",
+      "title": "Track 15 - Never Found the Words",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/15-Never-Found-the-Words.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.15.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "1.210.16",
+      "title": "Track 16 - The Turn We're Taking",
+      "type": "connection",
+      "audio": {
+        "primary": "assets/audio/playlists/irad/16-The-Turn-We're-Taking.mp3"
+      },
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/1.2/1.210.16.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Let's Sleep In",
+          "target": "1.210.1"
+        },
+        {
+          "key": "2",
+          "label": "It Rained All Day",
+          "target": "1.210.2"
+        },
+        {
+          "key": "3",
+          "label": "Coffee Steam Dreams",
+          "target": "1.210.3"
+        },
+        {
+          "key": "4",
+          "label": "Will the Sun Remember Us?",
+          "target": "1.210.4"
+        },
+        {
+          "key": "5",
+          "label": "Our Own Little World",
+          "target": "1.210.5"
+        },
+        {
+          "key": "6",
+          "label": "Something for Jem",
+          "target": "1.210.6"
+        },
+        {
+          "key": "7",
+          "label": "Never More Than Now",
+          "target": "1.210.7"
+        },
+        {
+          "key": "8",
+          "label": "Misty Blue Avenue",
+          "target": "1.210.8"
+        },
+        {
+          "key": "9",
+          "label": "The Things That We Could Do",
+          "target": "1.210.9"
+        },
+        {
+          "key": "10",
+          "label": "In and Out of Dreams",
+          "target": "1.210.10"
+        },
+        {
+          "key": "11",
+          "label": "Everywhere We Go",
+          "target": "1.210.11"
+        },
+        {
+          "key": "12",
+          "label": "This Ordinary Magic",
+          "target": "1.210.12"
+        },
+        {
+          "key": "13",
+          "label": "One Lucky Lifetime",
+          "target": "1.210.13"
+        },
+        {
+          "key": "14",
+          "label": "Kitchen Candlelight",
+          "target": "1.210.14"
+        },
+        {
+          "key": "15",
+          "label": "Never Found the Words",
+          "target": "1.210.15"
+        },
+        {
+          "key": "16",
+          "label": "The Turn We're Taking",
+          "target": "1.210.16"
+        },
+        {
+          "key": "0",
+          "label": "Album playlist",
+          "target": "1.210.0"
+        }
+      ],
+      "interruptible": [],
+      "links": [
+        {
+          "text": "Download 'It Rained All Day' on Bandcamp",
+          "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
+        }
+      ],
+      "tags": []
     }
   ]
 }

@@ -3,6 +3,7 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <base href="/">
     <title>Sigmon - A Set of Something</title>
     
@@ -4198,8 +4199,20 @@
         // ===========================================
         // YOUTUBE NODE FUNCTIONS
         // ===========================================
+        /** Extract 11-char video ID from bare ID, URL, or pasted watch link */
+        function normalizeYouTubeId(raw) {
+            if (!raw || typeof raw !== 'string') return '';
+            const trimmed = raw.trim();
+            const urlMatch = trimmed.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+            if (urlMatch) return urlMatch[1];
+            const bare = trimmed.split(/[?&#]/)[0];
+            if (/^[a-zA-Z0-9_-]{11}$/.test(bare)) return bare;
+            return '';
+        }
+
         function prepareYouTube(node) {
-            console.log('Preparing YouTube node:', node.id, 'youtubeId:', node.video.youtubeId);
+            const youtubeId = normalizeYouTubeId(node.video.youtubeId);
+            console.log('Preparing YouTube node:', node.id, 'youtubeId:', youtubeId || node.video.youtubeId);
             
             // Show poster image
             if (node.video.poster) {
@@ -4221,17 +4234,22 @@
         function startYouTube() {
             if (!currentNode?.video?.youtubeId || youtubeState !== 'ready') return;
             
-            const youtubeId = currentNode.video.youtubeId;
+            const youtubeId = normalizeYouTubeId(currentNode.video.youtubeId);
+            if (!youtubeId) {
+                console.error('Invalid YouTube ID:', currentNode.video.youtubeId);
+                progressText.textContent = 'Invalid YouTube video ID';
+                return;
+            }
             console.log('Starting YouTube video:', youtubeId);
             
-            // Build YouTube embed URL with parameters
-            // autoplay=1, rel=0 (no related videos), modestbranding=1
-            const embedUrl = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`;
+            // YouTube requires a valid Referer (Error 153 without referrerPolicy + origin)
+            const origin = encodeURIComponent(window.location.origin);
+            const embedUrl = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1&origin=${origin}`;
             
-            // Create iframe
             const iframe = document.createElement('iframe');
             iframe.src = embedUrl;
-            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
             iframe.allowFullscreen = true;
             
             // Clear container and add iframe
