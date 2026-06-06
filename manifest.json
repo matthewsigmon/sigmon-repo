@@ -82,7 +82,7 @@
       "type": "connection",
       "audio": {
         "aux1Crossfade": 8000,
-        "aux1": "assets/audio/aux/rain-fx.mp3"
+        "aux1": "https://media.matthewsigmon.com/assets/audio/aux/rain-fx.mp3"
       },
       "transition": {
         "type": "bundle",
