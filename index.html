@@ -1154,6 +1154,182 @@
             line-height: 1.6;
         }
 
+        /* React-while-listening replies (does not pause audio) */
+        .replies-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1150;
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.55);
+            padding: 16px;
+            box-sizing: border-box;
+        }
+
+        .replies-overlay.active {
+            display: flex;
+        }
+
+        .replies-panel {
+            max-width: 420px;
+            width: 100%;
+            max-height: min(70vh, 560px);
+            overflow: auto;
+            padding: 22px 20px 18px;
+            border-radius: 14px;
+            background: var(--neo-surface);
+            box-shadow: var(--shadow-raised);
+            margin-bottom: 8px;
+        }
+
+        .replies-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .replies-panel-header h2 {
+            font-size: 0.7rem;
+            font-weight: var(--font-weight-base);
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .replies-close {
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            padding: 4px;
+            line-height: 0;
+        }
+
+        .replies-close:hover {
+            color: var(--text-primary);
+        }
+
+        .replies-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 14px;
+            max-height: 28vh;
+            overflow-y: auto;
+        }
+
+        .replies-list:empty {
+            display: none;
+        }
+
+        .replies-item {
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: var(--input-bg);
+            box-shadow: var(--shadow-inset-soft);
+            text-align: left;
+        }
+
+        .replies-item-meta {
+            font-size: 0.45rem;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+            font-weight: 400;
+        }
+
+        .replies-item-text {
+            font-size: 0.55rem;
+            color: var(--text-primary);
+            line-height: 1.45;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-weight: 400;
+        }
+
+        .replies-name-input,
+        .replies-text-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 12px;
+            border: none;
+            border-radius: 10px;
+            background: var(--input-bg);
+            box-shadow: var(--shadow-inset);
+            color: var(--text-primary);
+            font-size: 0.55rem;
+            margin-bottom: 8px;
+            font-family: inherit;
+            font-weight: 400;
+        }
+
+        .replies-text-input {
+            min-height: 72px;
+            resize: vertical;
+            line-height: 1.4;
+        }
+
+        .replies-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .replies-count {
+            font-size: 0.45rem;
+            color: var(--text-dim);
+        }
+
+        .replies-submit {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 10px;
+            background: var(--accent-primary);
+            color: #1a1a1a;
+            font-size: 0.55rem;
+            font-weight: var(--font-weight-base);
+            cursor: pointer;
+            box-shadow: var(--shadow-raised);
+        }
+
+        .replies-submit:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .replies-status {
+            font-size: 0.45rem;
+            color: var(--text-dim);
+            min-height: 1.2em;
+            margin-top: 8px;
+            text-align: left;
+        }
+
+        .replies-status.error {
+            color: #e88;
+        }
+
+        .replies-link {
+            color: var(--accent-primary);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            user-select: none;
+            font-weight: var(--font-weight-base);
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: inherit;
+            font-family: inherit;
+            text-align: left;
+            display: block;
+        }
+
+        .replies-link:hover {
+            color: var(--accent-primary-hover);
+        }
+
         .external-link {
             color: #ffffff;
             text-decoration: none;
@@ -1347,6 +1523,12 @@
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 15px;
+            }
+
+            .replies-link {
+                flex: 0 0 100%;
+                width: 100%;
+                text-align: center;
             }
 
             .support-link {
@@ -2232,6 +2414,29 @@
                 <input type="password" id="convoPinInput" class="convo-pin-input" inputmode="numeric" maxlength="8" autocomplete="off" aria-label="PIN">
                 <button type="button" id="convoPinSubmit" class="convo-pin-submit">Continue</button>
                 <div id="convoPinError" class="convo-pin-error" aria-live="polite"></div>
+            </div>
+        </div>
+
+
+        <!-- REPLIES (react-while-listening; does not pause audio) -->
+        <div id="repliesOverlay" class="replies-overlay" aria-hidden="true">
+            <div class="replies-panel" role="dialog" aria-labelledby="repliesPanelTitle">
+                <div class="replies-panel-header">
+                    <h2 id="repliesPanelTitle">Leave a reply</h2>
+                    <button type="button" class="replies-close" onclick="closeRepliesOverlay()" aria-label="Close">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                            <path d="M18 6L6 18M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="repliesList" class="replies-list" aria-live="polite"></div>
+                <input type="text" id="repliesNameInput" class="replies-name-input" maxlength="80" placeholder="Name (optional)" autocomplete="nickname">
+                <textarea id="repliesTextInput" class="replies-text-input" maxlength="2000" placeholder="A short reaction while listening…" rows="3"></textarea>
+                <div class="replies-footer">
+                    <span id="repliesCharCount" class="replies-count">0 / 2000</span>
+                    <button type="button" id="repliesSubmitBtn" class="replies-submit" onclick="submitReply()">Send</button>
+                </div>
+                <div id="repliesStatus" class="replies-status" aria-live="polite"></div>
             </div>
         </div>
 
@@ -4403,8 +4608,14 @@
 
         // Keyboard arrows (desktop convenience)
         document.addEventListener('keydown', (e) => {
-        // Close text overlay with Escape key
+        // Close overlays with Escape key
         if (e.key === 'Escape') {
+            const repliesOverlay = document.getElementById('repliesOverlay');
+            if (repliesOverlay && repliesOverlay.classList.contains('active')) {
+                closeRepliesOverlay();
+                e.preventDefault();
+                return;
+            }
             const textOverlay = document.getElementById('textOverlay');
             if (textOverlay && textOverlay.classList.contains('active')) {
                 closeTextOverlay();
@@ -5267,6 +5478,7 @@
 
             currentNode = node;
             console.log('Loading node:', node.id, node.title);
+            closeRepliesOverlay();
 
             // Clean up preload cache - remove entries not relevant to new node
             // Keep: current node, forward choices, and recent history (for backward navigation)
@@ -5476,6 +5688,16 @@
                 linksArea.appendChild(shareEl);
                 }
             }
+
+            // Opt-in react-while-listening replies
+            if (nodeAllowsReplies(currentNode) && getRepliesSlug()) {
+                const replyBtn = document.createElement('button');
+                replyBtn.type = 'button';
+                replyBtn.className = 'replies-link';
+                replyBtn.textContent = nodeShowsReplies(currentNode) ? 'Replies' : 'Leave a reply';
+                replyBtn.addEventListener('click', () => openRepliesOverlay());
+                linksArea.appendChild(replyBtn);
+            }
         }
 
         function copyShareLink(el, url) {
@@ -5526,6 +5748,205 @@
         }
         
         let wasPlayingBeforeTextOverlay = false;
+
+        // ===========================================
+        // REPLIES - react-while-listening (Worker + KV)
+        // ===========================================
+        const REPLIES_TEXT_MAX = 2000;
+        const REPLIES_NAME_MAX = 80;
+        let repliesLocalCache = [];
+
+        function getRepliesApiBase() {
+            const base = (siteConfig && siteConfig.repliesApiBase) || '';
+            return String(base).replace(/\/$/, '');
+        }
+
+        // Convo personal links use /n/{slug}. Public / front-door visits fall back to
+        // site-config.repliesSlug, then terrain.id (one shared stream per install+node).
+        function getRepliesSlug() {
+            if (typeof activeConvoSlug !== 'undefined' && activeConvoSlug) return activeConvoSlug;
+            const fromConfig = (siteConfig && siteConfig.repliesSlug) || '';
+            if (String(fromConfig).trim()) return String(fromConfig).trim();
+            const fromTerrain = manifest?.terrain?.id || '';
+            return String(fromTerrain).trim() || null;
+        }
+
+        function nodeAllowsReplies(node) {
+            return !!(node && node.replies && node.replies.enabled);
+        }
+
+        function nodeShowsReplies(node) {
+            return !!(node && node.replies && node.replies.enabled && node.replies.visible);
+        }
+
+        function escapeReplyHtml(str) {
+            return String(str ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function formatReplyTime(ms) {
+            try {
+                return new Date(ms).toLocaleString(undefined, {
+                    month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
+                });
+            } catch {
+                return '';
+            }
+        }
+
+        function setRepliesStatus(msg, isError) {
+            const el = document.getElementById('repliesStatus');
+            if (!el) return;
+            el.textContent = msg || '';
+            el.classList.toggle('error', !!isError);
+        }
+
+        function updateRepliesCharCount() {
+            const ta = document.getElementById('repliesTextInput');
+            const count = document.getElementById('repliesCharCount');
+            if (!ta || !count) return;
+            count.textContent = `${ta.value.length} / ${REPLIES_TEXT_MAX}`;
+        }
+
+        function renderRepliesList(replies) {
+            const list = document.getElementById('repliesList');
+            if (!list) return;
+            list.innerHTML = '';
+            if (!nodeShowsReplies(currentNode)) return;
+            (replies || []).forEach(r => {
+                if (!r || r.deletedAt) return;
+                const item = document.createElement('div');
+                item.className = 'replies-item';
+                const who = r.name ? escapeReplyHtml(r.name) : 'Anonymous';
+                const when = formatReplyTime(r.createdAt);
+                item.innerHTML =
+                    `<div class="replies-item-meta">${who}${when ? ' · ' + escapeReplyHtml(when) : ''}</div>` +
+                    `<div class="replies-item-text">${escapeReplyHtml(r.text)}</div>`;
+                list.appendChild(item);
+            });
+        }
+
+        async function fetchRepliesForCurrent() {
+            const base = getRepliesApiBase();
+            const slug = getRepliesSlug();
+            if (!base || !slug || !currentNode?.id) return [];
+            const url = `${base}/replies?slug=${encodeURIComponent(slug)}&nodeId=${encodeURIComponent(currentNode.id)}`;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`GET ${res.status}`);
+            const data = await res.json();
+            return Array.isArray(data.replies) ? data.replies : [];
+        }
+
+        async function openRepliesOverlay() {
+            if (!nodeAllowsReplies(currentNode) || !getRepliesSlug()) return;
+            const base = getRepliesApiBase();
+            if (!base) {
+                console.warn('repliesApiBase missing from site-config.json');
+                return;
+            }
+
+            const overlay = document.getElementById('repliesOverlay');
+            const nameInput = document.getElementById('repliesNameInput');
+            const textInput = document.getElementById('repliesTextInput');
+            const submitBtn = document.getElementById('repliesSubmitBtn');
+            if (!overlay) return;
+
+            repliesLocalCache = [];
+            renderRepliesList([]);
+            if (nameInput) nameInput.value = '';
+            if (textInput) textInput.value = '';
+            updateRepliesCharCount();
+            setRepliesStatus('');
+            if (submitBtn) submitBtn.disabled = false;
+
+            overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
+            // Do NOT pause audio — react-while-listening
+
+            if (nodeShowsReplies(currentNode)) {
+                setRepliesStatus('Loading…');
+                try {
+                    repliesLocalCache = await fetchRepliesForCurrent();
+                    renderRepliesList(repliesLocalCache);
+                    setRepliesStatus(repliesLocalCache.length ? '' : 'No replies yet.');
+                } catch (err) {
+                    console.warn('Failed to load replies:', err);
+                    setRepliesStatus('Could not load replies.', true);
+                }
+            }
+
+            textInput?.focus();
+        }
+
+        function closeRepliesOverlay() {
+            const overlay = document.getElementById('repliesOverlay');
+            if (!overlay || !overlay.classList.contains('active')) return;
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+            setRepliesStatus('');
+        }
+
+        async function submitReply() {
+            const base = getRepliesApiBase();
+            const slug = getRepliesSlug();
+            const textInput = document.getElementById('repliesTextInput');
+            const nameInput = document.getElementById('repliesNameInput');
+            const submitBtn = document.getElementById('repliesSubmitBtn');
+            if (!base || !slug || !currentNode?.id || !textInput) return;
+
+            const text = (textInput.value || '').trim().slice(0, REPLIES_TEXT_MAX);
+            const name = (nameInput?.value || '').trim().slice(0, REPLIES_NAME_MAX);
+            if (!text) {
+                setRepliesStatus('Write something first.', true);
+                return;
+            }
+
+            if (submitBtn) submitBtn.disabled = true;
+            setRepliesStatus('Sending…');
+
+            try {
+                const res = await fetch(`${base}/replies`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        slug,
+                        nodeId: currentNode.id,
+                        text,
+                        name: name || null
+                    })
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok) {
+                    throw new Error(data.error || `POST ${res.status}`);
+                }
+
+                // Optimistic: show the returned record without re-fetching KV
+                textInput.value = '';
+                updateRepliesCharCount();
+                if (nodeShowsReplies(currentNode) && data && data.id) {
+                    repliesLocalCache = [...repliesLocalCache, data];
+                    renderRepliesList(repliesLocalCache);
+                }
+                setRepliesStatus('Sent. Thanks.');
+            } catch (err) {
+                console.warn('Failed to send reply:', err);
+                setRepliesStatus(err.message || 'Could not send reply.', true);
+            } finally {
+                if (submitBtn) submitBtn.disabled = false;
+            }
+        }
+
+        // Wire char count once DOM is ready (script is at end of body)
+        (function initRepliesUi() {
+            const textInput = document.getElementById('repliesTextInput');
+            textInput?.addEventListener('input', updateRepliesCharCount);
+            document.getElementById('repliesOverlay')?.addEventListener('click', (e) => {
+                if (e.target && e.target.id === 'repliesOverlay') closeRepliesOverlay();
+            });
+        })();
         
         function parseMarkdown(md) {
             if (!md) return '';
