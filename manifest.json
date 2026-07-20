@@ -128,7 +128,11 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "replies": {
+        "enabled": true,
+        "visible": true
+      }
     },
     {
       "id": "1.21",
