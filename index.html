@@ -5726,8 +5726,9 @@
             contentDiv.innerHTML = parseMarkdown(markdownText);
             overlay.classList.add('active');
             
-            // Pause audio when reading
-            if (!primaryAudio.paused) {
+            // Pause audio when reading — optional per node (default: pause)
+            const shouldPause = !currentNode || currentNode.textPauseAudio !== false;
+            if (shouldPause && !primaryAudio.paused) {
                 primaryAudio.pause();
                 wasPlayingBeforeTextOverlay = true;
             } else {
