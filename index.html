@@ -2198,6 +2198,121 @@
             flex-shrink: 0;
         }
 
+        /* Master volume — vertical under Index on desktop, horizontal beside it on mobile */
+        .volume-control {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        .volume-label {
+            display: flex;
+            color: var(--text-dim);
+            opacity: 0.85;
+            line-height: 0;
+        }
+
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+        }
+
+        .volume-slider:focus-visible {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 4px;
+            border-radius: 8px;
+        }
+
+        .volume-slider::-webkit-slider-runnable-track {
+            background: var(--input-bg);
+            border-radius: 999px;
+            box-shadow: var(--shadow-inset-soft);
+        }
+
+        .volume-slider::-moz-range-track {
+            background: var(--input-bg);
+            border-radius: 999px;
+            box-shadow: var(--shadow-inset-soft);
+            border: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            border: none;
+            box-shadow: var(--shadow-raised);
+            margin-top: -4px;
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            border: none;
+            box-shadow: var(--shadow-raised);
+        }
+
+        @media (min-width: 769px) {
+            .volume-slider {
+                writing-mode: vertical-lr;
+                direction: rtl;
+                height: 92px;
+                width: 18px;
+            }
+
+            .volume-slider::-webkit-slider-runnable-track {
+                width: 6px;
+                height: 100%;
+            }
+
+            .volume-slider::-moz-range-track {
+                width: 6px;
+                height: 100%;
+            }
+
+            .volume-slider::-webkit-slider-thumb {
+                margin-top: 0;
+                margin-left: -4px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .volume-control {
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+                margin-top: 0;
+                margin-left: 4px;
+            }
+
+            .volume-slider {
+                width: 110px;
+                height: 18px;
+            }
+
+            .volume-slider::-webkit-slider-runnable-track {
+                height: 6px;
+                width: 100%;
+            }
+
+            .volume-slider::-moz-range-track {
+                height: 6px;
+                width: 100%;
+            }
+        }
+
         .start-home-btn.terrain-ui-btn:hover,
         .index-btn.terrain-ui-btn:hover {
             filter: brightness(1.08);
@@ -2278,6 +2393,25 @@
                 <button type="button" class="index-btn terrain-ui-btn" id="indexBtn" aria-label="Index">
                 <span class="sr-only">Index</span>
             </button>
+            <div class="volume-control" title="Volume">
+                <label class="volume-label" for="volumeSlider" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                    </svg>
+                </label>
+                <input
+                    type="range"
+                    id="volumeSlider"
+                    class="volume-slider"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="100"
+                    aria-label="Volume"
+                />
+            </div>
         </div>
 
         <!-- Viewport -->
@@ -2600,6 +2734,72 @@
         let useTransitionA = true; // Toggle flag
         
         let keySound = new Audio();
+
+        // Master volume (0–1). Multiplies authored levels on content audio.
+        const MASTER_VOLUME_KEY = 'terrain_master_volume';
+        let masterVolume = 1;
+
+        function audioVol(authored = 1) {
+            const a = Number.isFinite(authored) ? authored : 1;
+            return Math.max(0, Math.min(1, a * masterVolume));
+        }
+
+        function loadMasterVolume() {
+            try {
+                const raw = localStorage.getItem(MASTER_VOLUME_KEY);
+                if (raw == null || raw === '') return;
+                const n = parseFloat(raw);
+                if (Number.isFinite(n)) masterVolume = Math.max(0, Math.min(1, n));
+            } catch (_) { /* ignore */ }
+        }
+
+        function saveMasterVolume() {
+            try {
+                localStorage.setItem(MASTER_VOLUME_KEY, String(masterVolume));
+            } catch (_) { /* ignore */ }
+        }
+
+        function setMasterVolume(next, { persist = true } = {}) {
+            const prev = masterVolume;
+            masterVolume = Math.max(0, Math.min(1, Number(next)));
+            if (!Number.isFinite(masterVolume)) masterVolume = 1;
+
+            const els = [primaryAudio, aux1Audio, aux1CrossfadeAudio, transitionAudioA, transitionAudioB];
+            if (prev > 0.001) {
+                const scale = masterVolume / prev;
+                els.forEach(el => {
+                    if (!el) return;
+                    el.volume = Math.max(0, Math.min(1, el.volume * scale));
+                });
+            } else {
+                // Coming up from mute — restore authored defaults
+                if (primaryAudio?.src) primaryAudio.volume = audioVol(1);
+                if (aux1Audio?.src) aux1Audio.volume = audioVol(1);
+                if (aux1CrossfadeAudio?.src) aux1CrossfadeAudio.volume = audioVol(
+                    aux1CrossfadeAudio.paused ? 0 : 1
+                );
+            }
+
+            const slider = document.getElementById('volumeSlider');
+            if (slider) slider.value = String(Math.round(masterVolume * 100));
+            if (persist) saveMasterVolume();
+        }
+
+        function initVolumeControl() {
+            loadMasterVolume();
+            const slider = document.getElementById('volumeSlider');
+            if (!slider) return;
+            slider.value = String(Math.round(masterVolume * 100));
+            const onInput = () => setMasterVolume(parseInt(slider.value, 10) / 100);
+            slider.addEventListener('input', onInput);
+            slider.addEventListener('change', onInput);
+            // Apply to elements that may already exist at default 1.0
+            primaryAudio.volume = audioVol(1);
+            aux1Audio.volume = audioVol(1);
+            aux1CrossfadeAudio.volume = audioVol(0);
+            transitionAudioA.volume = audioVol(1);
+            transitionAudioB.volume = audioVol(1);
+        }
 
         const isSafari = /Safari/.test(navigator.userAgent) &&
             !/Chrome|Chromium|Edg|OPR|Brave|CriOS|FxiOS/.test(navigator.userAgent);
@@ -3519,6 +3719,7 @@
                 (resumeTime > 0 ? ` (resuming at ${Math.floor(resumeTime)}s)` : ''));
 
             primaryAudio.src = resolveMediaUrl(trackFile);
+            primaryAudio.volume = audioVol(1);
             primaryAudio.loop = false;
 
             if (resumeTime > 0) {
@@ -4903,7 +5104,7 @@
                 const fadeInterval = Timers.setInterval(() => {
                     const elapsed = Date.now() - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-                    audioElement.volume = progress * targetVolume;
+                    audioElement.volume = audioVol(progress * targetVolume);
                     
                     if (progress >= 1) {
                         Timers.clearInterval(fadeInterval);
@@ -4935,15 +5136,15 @@
                             const targetVolume = 1.0;
 
                             // Equal power crossfade using cosine/sine curves
-                            aux1Audio.volume = targetVolume * Math.cos(progress * Math.PI / 2);
-                            aux1CrossfadeAudio.volume = targetVolume * Math.sin(progress * Math.PI / 2);
+                            aux1Audio.volume = audioVol(targetVolume * Math.cos(progress * Math.PI / 2));
+                            aux1CrossfadeAudio.volume = audioVol(targetVolume * Math.sin(progress * Math.PI / 2));
                             
                             if (progress >= 1) {
                                 Timers.clearInterval(fadeInterval);
                                 // Swap: crossfade becomes main, prepare for next loop
                                 aux1Audio.pause();
                                 aux1Audio.currentTime = 0;
-                                aux1Audio.volume = 1.0;
+                                aux1Audio.volume = audioVol(1.0);
                                 
                                 // Swap the audio elements
                                 const temp = aux1Audio;
@@ -5287,6 +5488,7 @@
                 if (audioFile && !isPlaylist) {
                     PerfMonitor.start('audio-load-' + node.id);
                     primaryAudio.src = resolveMediaUrl(audioFile);
+                    primaryAudio.volume = audioVol(1);
                     primaryAudio.loop = isAudioRepeat(node);
                     
                     // Track audio load time
@@ -5576,7 +5778,7 @@
                 
                 // Apply volume adjustment if specified
                 const volumeAdjustment = transition.volume || 0;
-                transitionAudio.volume = dbToVolume(volumeAdjustment);
+                transitionAudio.volume = audioVol(dbToVolume(volumeAdjustment));
                 
                 const timingOffset = transition.timing || 0;
                 
@@ -6498,6 +6700,7 @@
                         const trackFile = currentPlaylist.files[prevTrack];
                         console.log(`Playlist: Playing track ${prevTrack + 1}/${currentPlaylist.files.length}: ${trackFile}`);
                         primaryAudio.src = resolveMediaUrl(trackFile);
+                        primaryAudio.volume = audioVol(1);
                         safeSetOnEnded(primaryAudio, () => { advancePlaylist(); }, navVersion);
                         primaryAudio.play().catch(e => console.log('Playlist prev track failed:', e));
                         savePlaylistState(currentPlaylist.nodeId, { currentTrack: prevTrack, currentTime: 0 });
@@ -6519,6 +6722,7 @@
                     if (needsReload && currentNode?.audio?.primary) {
                         // Audio element is in bad state, reload it
                         primaryAudio.src = resolveMediaUrl(currentNode.audio.primary);
+                        primaryAudio.volume = audioVol(1);
                         primaryAudio.load();
                         primaryAudio.currentTime = 0;
                         primaryAudio.play().catch(e => console.log('Audio play failed:', e));
@@ -7354,6 +7558,7 @@ src: ${pa.src ? pa.src.split('/').slice(-2).join('/') : '(empty)'}`;
         });
 
         loadSiteConfig().then(() => loadManifest());
+        initVolumeControl();
         updateInputDisplay();
         updateRtnDelButton();
         updateAddressModeOverlay();
