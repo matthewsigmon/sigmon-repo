@@ -76,7 +76,7 @@
       "imageAutoAdvance": 7000
     },
     {
-      "id": "1.20",
+      "id": "100.1",
       "title": "It Rained All Day - options",
       "type": "connection",
       "audio": {
@@ -102,7 +102,7 @@
       "visuals": [
         {
           "type": "video",
-          "src": "https://media.matthewsigmon.com/assets/video/1.20/1.20.mp4",
+          "src": "https://media.matthewsigmon.com/assets/video/100.1/100.1.mp4",
           "start": 0,
           "duration": 0,
           "persist": true,
@@ -113,7 +113,7 @@
         {
           "key": "1",
           "label": "It Rained All Day - Listen",
-          "target": "1.21"
+          "target": "100.1.1"
         },
         {
           "key": "2",
@@ -135,8 +135,8 @@
       }
     },
     {
-      "id": "1.21",
-      "title": "Track 1 - Let's Sleep In (Copy)",
+      "id": "100.1.1",
+      "title": "It Rained All Day - Listen",
       "type": "connection",
       "audio": {
         "aux1": "https://media.matthewsigmon.com/assets/audio/aux/rain-fx.mp3",
@@ -161,7 +161,7 @@
       "visuals": [
         {
           "type": "video",
-          "src": "https://media.matthewsigmon.com/assets/video/1.20/1.21.mp4",
+          "src": "https://media.matthewsigmon.com/assets/video/100.1/100.1.1.mp4",
           "start": 0,
           "duration": 0,
           "persist": true,
@@ -172,87 +172,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -265,7 +265,7 @@
       "tags": []
     },
     {
-      "id": "1.210.0",
+      "id": "100.1.1.0",
       "title": "It Rained All Day - playlist",
       "type": "connection",
       "audio": {
@@ -291,7 +291,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.0.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.0.jpg",
           "start": 0,
           "duration": 0
         }
@@ -300,82 +300,82 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         }
       ],
       "interruptible": [],
@@ -388,7 +388,7 @@
       "tags": []
     },
     {
-      "id": "1.210.1",
+      "id": "100.1.1.1",
       "title": "Track 1 - Let's Sleep In",
       "type": "connection",
       "audio": {
@@ -413,7 +413,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.1.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.1.jpg",
           "start": 0,
           "duration": 0
         }
@@ -422,87 +422,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -515,7 +515,7 @@
       "tags": []
     },
     {
-      "id": "1.210.2",
+      "id": "100.1.1.2",
       "title": "Track 2 -  It Rained All Day",
       "type": "connection",
       "audio": {
@@ -540,7 +540,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.2.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.2.jpg",
           "start": 0,
           "duration": 0
         }
@@ -549,87 +549,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -642,7 +642,7 @@
       "tags": []
     },
     {
-      "id": "1.210.3",
+      "id": "100.1.1.3",
       "title": "Track 3 - Coffee Steam Dreams",
       "type": "connection",
       "audio": {
@@ -667,7 +667,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.3.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.3.jpg",
           "start": 0,
           "duration": 0
         }
@@ -676,87 +676,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -769,7 +769,7 @@
       "tags": []
     },
     {
-      "id": "1.210.4",
+      "id": "100.1.1.4",
       "title": "Track 4 - Will the Sun Remember Us?",
       "type": "connection",
       "audio": {
@@ -794,7 +794,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.4.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.4.jpg",
           "start": 0,
           "duration": 0
         }
@@ -803,87 +803,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -896,7 +896,7 @@
       "tags": []
     },
     {
-      "id": "1.210.5",
+      "id": "100.1.1.5",
       "title": "Track 5 - Our Own Little World",
       "type": "connection",
       "audio": {
@@ -921,7 +921,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.5.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.5.jpg",
           "start": 0,
           "duration": 0
         }
@@ -930,87 +930,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -1023,7 +1023,7 @@
       "tags": []
     },
     {
-      "id": "1.210.6",
+      "id": "100.1.1.6",
       "title": "Track 6 - Something for Jem",
       "type": "connection",
       "audio": {
@@ -1048,7 +1048,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.6.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.6.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1057,87 +1057,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -1150,7 +1150,7 @@
       "tags": []
     },
     {
-      "id": "1.210.7",
+      "id": "100.1.1.7",
       "title": "Track 7 - Never More Than Now",
       "type": "connection",
       "audio": {
@@ -1175,7 +1175,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.7.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.7.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1184,87 +1184,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -1277,7 +1277,7 @@
       "tags": []
     },
     {
-      "id": "1.210.8",
+      "id": "100.1.1.8",
       "title": "Track 8 - Misty Blue Avenue",
       "type": "connection",
       "audio": {
@@ -1302,7 +1302,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.8.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.8.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1311,87 +1311,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -1404,7 +1404,7 @@
       "tags": []
     },
     {
-      "id": "1.210.9",
+      "id": "100.1.1.9",
       "title": "Track 9 - The Things That We Could Do",
       "type": "connection",
       "audio": {
@@ -1429,7 +1429,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.9.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.9.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1438,87 +1438,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -1531,7 +1531,7 @@
       "tags": []
     },
     {
-      "id": "1.210.10",
+      "id": "100.1.1.10",
       "title": "Track 10 - In and Out of Dreams",
       "type": "connection",
       "audio": {
@@ -1556,7 +1556,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.10.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.10.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1565,87 +1565,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -1658,7 +1658,7 @@
       "tags": []
     },
     {
-      "id": "1.210.11",
+      "id": "100.1.1.11",
       "title": "Track 11 -  Everywhere We Go",
       "type": "connection",
       "audio": {
@@ -1683,7 +1683,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.11.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.11.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1692,87 +1692,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -1785,7 +1785,7 @@
       "tags": []
     },
     {
-      "id": "1.210.12",
+      "id": "100.1.1.12",
       "title": "Track 12 - This Ordinary Magic",
       "type": "connection",
       "audio": {
@@ -1810,7 +1810,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.12.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.12.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1819,87 +1819,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -1912,7 +1912,7 @@
       "tags": []
     },
     {
-      "id": "1.210.13",
+      "id": "100.1.1.13",
       "title": "Track 13 - One Lucky Lifetime",
       "type": "connection",
       "audio": {
@@ -1937,7 +1937,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.13.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.13.jpg",
           "start": 0,
           "duration": 0
         }
@@ -1946,87 +1946,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -2039,7 +2039,7 @@
       "tags": []
     },
     {
-      "id": "1.210.14",
+      "id": "100.1.1.14",
       "title": "Track 14 - Kitchen Candlelight",
       "type": "connection",
       "audio": {
@@ -2064,7 +2064,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.14.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.14.jpg",
           "start": 0,
           "duration": 0
         }
@@ -2073,87 +2073,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -2166,7 +2166,7 @@
       "tags": []
     },
     {
-      "id": "1.210.15",
+      "id": "100.1.1.15",
       "title": "Track 15 - Never Found the Words",
       "type": "connection",
       "audio": {
@@ -2191,7 +2191,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.15.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.15.jpg",
           "start": 0,
           "duration": 0
         }
@@ -2200,87 +2200,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
@@ -2293,7 +2293,7 @@
       "tags": []
     },
     {
-      "id": "1.210.16",
+      "id": "100.1.1.16",
       "title": "Track 16 - The Turn We're Taking",
       "type": "connection",
       "audio": {
@@ -2318,7 +2318,7 @@
       "visuals": [
         {
           "type": "image",
-          "src": "https://media.matthewsigmon.com/assets/images/nodes/1.2/1.210.16.jpg",
+          "src": "https://media.matthewsigmon.com/assets/images/nodes/100.1.1/100.1.1.16.jpg",
           "start": 0,
           "duration": 0
         }
@@ -2327,87 +2327,87 @@
         {
           "key": "1",
           "label": "Let's Sleep In",
-          "target": "1.210.1"
+          "target": "100.1.1.1"
         },
         {
           "key": "2",
           "label": "It Rained All Day",
-          "target": "1.210.2"
+          "target": "100.1.1.2"
         },
         {
           "key": "3",
           "label": "Coffee Steam Dreams",
-          "target": "1.210.3"
+          "target": "100.1.1.3"
         },
         {
           "key": "4",
           "label": "Will the Sun Remember Us?",
-          "target": "1.210.4"
+          "target": "100.1.1.4"
         },
         {
           "key": "5",
           "label": "Our Own Little World",
-          "target": "1.210.5"
+          "target": "100.1.1.5"
         },
         {
           "key": "6",
           "label": "Something for Jem",
-          "target": "1.210.6"
+          "target": "100.1.1.6"
         },
         {
           "key": "7",
           "label": "Never More Than Now",
-          "target": "1.210.7"
+          "target": "100.1.1.7"
         },
         {
           "key": "8",
           "label": "Misty Blue Avenue",
-          "target": "1.210.8"
+          "target": "100.1.1.8"
         },
         {
           "key": "9",
           "label": "The Things That We Could Do",
-          "target": "1.210.9"
+          "target": "100.1.1.9"
         },
         {
           "key": "10",
           "label": "In and Out of Dreams",
-          "target": "1.210.10"
+          "target": "100.1.1.10"
         },
         {
           "key": "11",
           "label": "Everywhere We Go",
-          "target": "1.210.11"
+          "target": "100.1.1.11"
         },
         {
           "key": "12",
           "label": "This Ordinary Magic",
-          "target": "1.210.12"
+          "target": "100.1.1.12"
         },
         {
           "key": "13",
           "label": "One Lucky Lifetime",
-          "target": "1.210.13"
+          "target": "100.1.1.13"
         },
         {
           "key": "14",
           "label": "Kitchen Candlelight",
-          "target": "1.210.14"
+          "target": "100.1.1.14"
         },
         {
           "key": "15",
           "label": "Never Found the Words",
-          "target": "1.210.15"
+          "target": "100.1.1.15"
         },
         {
           "key": "16",
           "label": "The Turn We're Taking",
-          "target": "1.210.16"
+          "target": "100.1.1.16"
         },
         {
           "key": "0",
           "label": "Album playlist",
-          "target": "1.210.0"
+          "target": "100.1.1.0"
         }
       ],
       "interruptible": [],
