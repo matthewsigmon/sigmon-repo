@@ -2457,22 +2457,38 @@
             top: 50%;
             transform: translateY(-50%);
             z-index: 3;
-            color: var(--text-dim);
+            color: var(--accent-primary);
             opacity: 0;
             pointer-events: none;
             line-height: 0;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.35s ease;
         }
 
         .drift-glyph svg {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             display: block;
+            filter: drop-shadow(0 0 5px var(--accent-primary-glow));
         }
 
         body.drift-active .drift-glyph {
             opacity: 1;
-            animation: drift-breathe 3.2s ease-in-out infinite;
+            animation: drift-glyph-breathe 2.4s ease-in-out infinite;
+        }
+
+        body.drift-active .input-field .progress-text {
+            padding-right: 38px;
+        }
+
+        @keyframes drift-glyph-breathe {
+            0%, 100% {
+                opacity: 0.55;
+                transform: translateY(-50%) scale(0.92);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1.05);
+            }
         }
 
         /* Chrome recedes while drifting; skip key stays live ("not this, keep drifting") */
@@ -5010,7 +5026,11 @@
             // Handle video ready state (show duration at 0:00)
             if (videoState === 'ready' && viewportVideo.duration > 0) {
                 progressBar.style.width = '0%';
-                progressText.textContent = `0:00 / ${formatTime(viewportVideo.duration)}`;
+                if (!isAddressMode && inputValue.length === 0) {
+                    progressText.textContent = driftActive
+                        ? 'Drifting'
+                        : `0:00 / ${formatTime(viewportVideo.duration)}`;
+                }
                 return;
             }
             
@@ -5018,8 +5038,10 @@
             if (audioManualState === 'ready') {
                 // Don't overwrite user input or address mode display
                 if (isAddressMode || inputValue.length > 0) return;
-                if (primaryAudio.duration > 0) {
-                    progressBar.style.width = '0%';
+                progressBar.style.width = '0%';
+                if (driftActive) {
+                    progressText.textContent = 'Drifting';
+                } else if (primaryAudio.duration > 0) {
                     progressText.textContent = `Press ✓ to play audio · ${formatTime(primaryAudio.duration)}`;
                 }
                 return;
@@ -5054,18 +5076,17 @@
             if (duration > 0) {
                 const percent = (current / duration) * 100;
                 progressBar.style.width = `${percent}%`;
-                
-                // Show playlist track info if active (audio only)
-                let displayText = '';
-                if (!videoState && currentPlaylist) {
+
+                // While drifting, keep the bar moving but label the mode — not the clock
+                if (driftActive) {
+                    progressText.textContent = 'Drifting';
+                } else if (!videoState && currentPlaylist) {
                     const trackNum = currentPlaylist.currentTrack + 1;
                     const totalTracks = currentPlaylist.files.length;
-                    displayText = `Track ${trackNum}/${totalTracks} - ${formatTime(current)} / ${formatTime(duration)}`;
+                    progressText.textContent = `Track ${trackNum}/${totalTracks} - ${formatTime(current)} / ${formatTime(duration)}`;
                 } else {
-                    displayText = `${formatTime(current)} / ${formatTime(duration)}`;
+                    progressText.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
                 }
-                
-                progressText.textContent = displayText;
                 
                 // Periodically save playlist position for resume (every ~10 seconds)
                 if (currentPlaylist && current > 0) {
@@ -6503,6 +6524,11 @@
         function refreshIdleProgressDisplay() {
             if (isAddressMode || inputValue.length > 0) return;
 
+            if (driftActive) {
+                progressText.textContent = 'Drifting';
+                return;
+            }
+
             if (videoState === 'ready' && viewportVideo.duration > 0) {
                 progressBar.style.width = '0%';
                 progressText.textContent = `0:00 / ${formatTime(viewportVideo.duration)}`;
@@ -6526,7 +6552,7 @@
 
             if (!hasPrimary && (hasAux1 || hasChoices)) {
                 progressBar.style.width = '0%';
-                progressText.textContent = driftActive ? 'Drifting' : 'Make a choice when ready';
+                progressText.textContent = 'Make a choice when ready';
                 return;
             }
 
@@ -7451,8 +7477,12 @@
             scheduleDriftQuiet();
             unlockAudio();
             primeAudioContext();
-            onDriftNodeEntered(currentNode);
+            // Cue immediately — don't dwell on the node where Drift was pressed
+            if (!isAddressMode && inputValue.length === 0) {
+                progressText.textContent = 'Drifting';
+            }
             console.log('Drift: engaged');
+            driftAdvance();
         }
 
         function stopDrift() {
