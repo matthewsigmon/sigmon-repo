@@ -2735,10 +2735,77 @@
         
         let keySound = new Audio();
 
-        // Master volume (0–1). Multiplies authored levels on content audio.
+        // Master volume (0–1).
+        // iOS Safari ignores HTMLMediaElement.volume by design, so content audio is
+        // routed through a Web Audio GainNode. Authored levels use per-element gains;
+        // the slider sets the shared master gain.
         const MASTER_VOLUME_KEY = 'terrain_master_volume';
         let masterVolume = 1;
+        let audioCtx = null;
+        let masterGain = null;
+        const audioGraphNodes = new WeakMap(); // HTMLMediaElement -> { source, gain }
 
+        function getAudioContext() {
+            if (audioCtx) return audioCtx;
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return null;
+            try {
+                audioCtx = new AC();
+                masterGain = audioCtx.createGain();
+                masterGain.gain.value = masterVolume;
+                masterGain.connect(audioCtx.destination);
+            } catch (err) {
+                console.warn('AudioContext unavailable:', err);
+                audioCtx = null;
+                masterGain = null;
+            }
+            return audioCtx;
+        }
+
+        function ensureAudioGraph(el) {
+            if (!el) return null;
+            const existing = audioGraphNodes.get(el);
+            if (existing) return existing;
+            const ctx = getAudioContext();
+            if (!ctx || !masterGain) return null;
+            try {
+                const source = ctx.createMediaElementSource(el);
+                const gain = ctx.createGain();
+                gain.gain.value = 1;
+                source.connect(gain);
+                gain.connect(masterGain);
+                // Element volume stays at 1; all level control is via GainNodes
+                try { el.volume = 1; } catch (_) { /* iOS may ignore */ }
+                const nodes = { source, gain };
+                audioGraphNodes.set(el, nodes);
+                return nodes;
+            } catch (err) {
+                console.warn('createMediaElementSource failed:', err);
+                return null;
+            }
+        }
+
+        function ensureAllContentAudioGraphs() {
+            [primaryAudio, aux1Audio, aux1CrossfadeAudio, transitionAudioA, transitionAudioB]
+                .forEach(el => ensureAudioGraph(el));
+        }
+
+        function setElementVolume(el, authored = 1) {
+            if (!el) return;
+            const a = Math.max(0, Math.min(1, Number.isFinite(authored) ? authored : 1));
+            const nodes = ensureAudioGraph(el);
+            if (nodes) {
+                nodes.gain.gain.value = a;
+                try { el.volume = 1; } catch (_) { /* ignore */ }
+                return;
+            }
+            // Fallback when Web Audio is unavailable
+            try {
+                el.volume = Math.max(0, Math.min(1, a * masterVolume));
+            } catch (_) { /* ignore */ }
+        }
+
+        // Back-compat helper for call sites that still compute a combined level
         function audioVol(authored = 1) {
             const a = Number.isFinite(authored) ? authored : 1;
             return Math.max(0, Math.min(1, a * masterVolume));
@@ -2760,24 +2827,29 @@
         }
 
         function setMasterVolume(next, { persist = true } = {}) {
-            const prev = masterVolume;
             masterVolume = Math.max(0, Math.min(1, Number(next)));
             if (!Number.isFinite(masterVolume)) masterVolume = 1;
 
-            const els = [primaryAudio, aux1Audio, aux1CrossfadeAudio, transitionAudioA, transitionAudioB];
-            if (prev > 0.001) {
-                const scale = masterVolume / prev;
+            // Slider input counts as a user gesture on iOS — safe to create/resume context.
+            const ctx = getAudioContext();
+            if (ctx && ctx.state === 'suspended') {
+                ctx.resume().catch(() => {});
+            }
+            ensureAllContentAudioGraphs();
+
+            if (masterGain) {
+                masterGain.gain.value = masterVolume;
+            } else {
+                // Fallback: scale element volumes directly (non-iOS / no Web Audio)
+                const els = [primaryAudio, aux1Audio, aux1CrossfadeAudio, transitionAudioA, transitionAudioB];
                 els.forEach(el => {
                     if (!el) return;
-                    el.volume = Math.max(0, Math.min(1, el.volume * scale));
+                    const nodes = audioGraphNodes.get(el);
+                    const authored = nodes ? nodes.gain.gain.value : 1;
+                    try {
+                        el.volume = Math.max(0, Math.min(1, authored * masterVolume));
+                    } catch (_) { /* ignore */ }
                 });
-            } else {
-                // Coming up from mute — restore authored defaults
-                if (primaryAudio?.src) primaryAudio.volume = audioVol(1);
-                if (aux1Audio?.src) aux1Audio.volume = audioVol(1);
-                if (aux1CrossfadeAudio?.src) aux1CrossfadeAudio.volume = audioVol(
-                    aux1CrossfadeAudio.paused ? 0 : 1
-                );
             }
 
             const slider = document.getElementById('volumeSlider');
@@ -2793,12 +2865,9 @@
             const onInput = () => setMasterVolume(parseInt(slider.value, 10) / 100);
             slider.addEventListener('input', onInput);
             slider.addEventListener('change', onInput);
-            // Apply to elements that may already exist at default 1.0
-            primaryAudio.volume = audioVol(1);
-            aux1Audio.volume = audioVol(1);
-            aux1CrossfadeAudio.volume = audioVol(0);
-            transitionAudioA.volume = audioVol(1);
-            transitionAudioB.volume = audioVol(1);
+            // Don't wire MediaElementSource here — iOS needs a user gesture first.
+            // primeAudioContext() / setElementVolume() connect on interaction.
+            if (masterGain) masterGain.gain.value = masterVolume;
         }
 
         const isSafari = /Safari/.test(navigator.userAgent) &&
@@ -3719,7 +3788,7 @@
                 (resumeTime > 0 ? ` (resuming at ${Math.floor(resumeTime)}s)` : ''));
 
             primaryAudio.src = resolveMediaUrl(trackFile);
-            primaryAudio.volume = audioVol(1);
+            setElementVolume(primaryAudio, 1);
             primaryAudio.loop = false;
 
             if (resumeTime > 0) {
@@ -4159,6 +4228,12 @@
         // Prime audio context during user gesture - helps Safari mobile
         // remember the gesture through async transitions
         function primeAudioContext() {
+            const ctx = getAudioContext();
+            if (ctx && ctx.state === 'suspended') {
+                ctx.resume().catch(() => {});
+            }
+            ensureAllContentAudioGraphs();
+            if (masterGain) masterGain.gain.value = masterVolume;
             const silentAudio = new Audio(silentDataUri);
             silentAudio.volume = 0;
             silentAudio.play().catch(() => {});
@@ -5097,14 +5172,14 @@
         }
 
         function fadeInAux(audioElement, targetVolume, duration) {
-            audioElement.volume = 0;
+            setElementVolume(audioElement, 0);
             audioElement.play().then(() => {
                 // Force the target volume after play succeeds (helps with mobile)
                 const startTime = Date.now();
                 const fadeInterval = Timers.setInterval(() => {
                     const elapsed = Date.now() - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-                    audioElement.volume = audioVol(progress * targetVolume);
+                    setElementVolume(audioElement, progress * targetVolume);
                     
                     if (progress >= 1) {
                         Timers.clearInterval(fadeInterval);
@@ -5123,7 +5198,7 @@
                     if (timeRemaining <= crossfadeDuration / 1000 && aux1CrossfadeAudio.paused) {
                         // Set up the crossfade audio
                         aux1CrossfadeAudio.src = audioSrc;
-                        aux1CrossfadeAudio.volume = 0;
+                        setElementVolume(aux1CrossfadeAudio, 0);
                         aux1CrossfadeAudio.currentTime = 0;
                         aux1CrossfadeAudio.play().catch(e => console.log('Crossfade audio failed:', e));
                         
@@ -5136,15 +5211,15 @@
                             const targetVolume = 1.0;
 
                             // Equal power crossfade using cosine/sine curves
-                            aux1Audio.volume = audioVol(targetVolume * Math.cos(progress * Math.PI / 2));
-                            aux1CrossfadeAudio.volume = audioVol(targetVolume * Math.sin(progress * Math.PI / 2));
+                            setElementVolume(aux1Audio, targetVolume * Math.cos(progress * Math.PI / 2));
+                            setElementVolume(aux1CrossfadeAudio, targetVolume * Math.sin(progress * Math.PI / 2));
                             
                             if (progress >= 1) {
                                 Timers.clearInterval(fadeInterval);
                                 // Swap: crossfade becomes main, prepare for next loop
                                 aux1Audio.pause();
                                 aux1Audio.currentTime = 0;
-                                aux1Audio.volume = audioVol(1.0);
+                                setElementVolume(aux1Audio, 1.0);
                                 
                                 // Swap the audio elements
                                 const temp = aux1Audio;
@@ -5488,7 +5563,7 @@
                 if (audioFile && !isPlaylist) {
                     PerfMonitor.start('audio-load-' + node.id);
                     primaryAudio.src = resolveMediaUrl(audioFile);
-                    primaryAudio.volume = audioVol(1);
+                    setElementVolume(primaryAudio, 1);
                     primaryAudio.loop = isAudioRepeat(node);
                     
                     // Track audio load time
@@ -5778,7 +5853,8 @@
                 
                 // Apply volume adjustment if specified
                 const volumeAdjustment = transition.volume || 0;
-                transitionAudio.volume = audioVol(dbToVolume(volumeAdjustment));
+                transitionAudio.volume = 1;
+                setElementVolume(transitionAudio, dbToVolume(volumeAdjustment));
                 
                 const timingOffset = transition.timing || 0;
                 
@@ -6700,7 +6776,7 @@
                         const trackFile = currentPlaylist.files[prevTrack];
                         console.log(`Playlist: Playing track ${prevTrack + 1}/${currentPlaylist.files.length}: ${trackFile}`);
                         primaryAudio.src = resolveMediaUrl(trackFile);
-                        primaryAudio.volume = audioVol(1);
+                        setElementVolume(primaryAudio, 1);
                         safeSetOnEnded(primaryAudio, () => { advancePlaylist(); }, navVersion);
                         primaryAudio.play().catch(e => console.log('Playlist prev track failed:', e));
                         savePlaylistState(currentPlaylist.nodeId, { currentTrack: prevTrack, currentTime: 0 });
@@ -6722,7 +6798,7 @@
                     if (needsReload && currentNode?.audio?.primary) {
                         // Audio element is in bad state, reload it
                         primaryAudio.src = resolveMediaUrl(currentNode.audio.primary);
-                        primaryAudio.volume = audioVol(1);
+                        setElementVolume(primaryAudio, 1);
                         primaryAudio.load();
                         primaryAudio.currentTime = 0;
                         primaryAudio.play().catch(e => console.log('Audio play failed:', e));
