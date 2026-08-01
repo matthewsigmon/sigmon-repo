@@ -2735,77 +2735,22 @@
         
         let keySound = new Audio();
 
-        // Master volume (0–1).
-        // iOS Safari ignores HTMLMediaElement.volume by design, so content audio is
-        // routed through a Web Audio GainNode. Authored levels use per-element gains;
-        // the slider sets the shared master gain.
+        // Master volume (0–1). Uses HTMLMediaElement.volume (works on desktop + Android).
+        // iOS Safari ignores .volume by design — device volume still applies; do not route
+        // through createMediaElementSource (cross-origin R2 media becomes silent without CORS).
         const MASTER_VOLUME_KEY = 'terrain_master_volume';
         let masterVolume = 1;
-        let audioCtx = null;
-        let masterGain = null;
-        const audioGraphNodes = new WeakMap(); // HTMLMediaElement -> { source, gain }
-
-        function getAudioContext() {
-            if (audioCtx) return audioCtx;
-            const AC = window.AudioContext || window.webkitAudioContext;
-            if (!AC) return null;
-            try {
-                audioCtx = new AC();
-                masterGain = audioCtx.createGain();
-                masterGain.gain.value = masterVolume;
-                masterGain.connect(audioCtx.destination);
-            } catch (err) {
-                console.warn('AudioContext unavailable:', err);
-                audioCtx = null;
-                masterGain = null;
-            }
-            return audioCtx;
-        }
-
-        function ensureAudioGraph(el) {
-            if (!el) return null;
-            const existing = audioGraphNodes.get(el);
-            if (existing) return existing;
-            const ctx = getAudioContext();
-            if (!ctx || !masterGain) return null;
-            try {
-                const source = ctx.createMediaElementSource(el);
-                const gain = ctx.createGain();
-                gain.gain.value = 1;
-                source.connect(gain);
-                gain.connect(masterGain);
-                // Element volume stays at 1; all level control is via GainNodes
-                try { el.volume = 1; } catch (_) { /* iOS may ignore */ }
-                const nodes = { source, gain };
-                audioGraphNodes.set(el, nodes);
-                return nodes;
-            } catch (err) {
-                console.warn('createMediaElementSource failed:', err);
-                return null;
-            }
-        }
-
-        function ensureAllContentAudioGraphs() {
-            [primaryAudio, aux1Audio, aux1CrossfadeAudio, transitionAudioA, transitionAudioB]
-                .forEach(el => ensureAudioGraph(el));
-        }
+        const authoredVolume = new WeakMap(); // HTMLMediaElement -> authored 0–1
 
         function setElementVolume(el, authored = 1) {
             if (!el) return;
             const a = Math.max(0, Math.min(1, Number.isFinite(authored) ? authored : 1));
-            const nodes = ensureAudioGraph(el);
-            if (nodes) {
-                nodes.gain.gain.value = a;
-                try { el.volume = 1; } catch (_) { /* ignore */ }
-                return;
-            }
-            // Fallback when Web Audio is unavailable
+            authoredVolume.set(el, a);
             try {
                 el.volume = Math.max(0, Math.min(1, a * masterVolume));
             } catch (_) { /* ignore */ }
         }
 
-        // Back-compat helper for call sites that still compute a combined level
         function audioVol(authored = 1) {
             const a = Number.isFinite(authored) ? authored : 1;
             return Math.max(0, Math.min(1, a * masterVolume));
@@ -2830,27 +2775,14 @@
             masterVolume = Math.max(0, Math.min(1, Number(next)));
             if (!Number.isFinite(masterVolume)) masterVolume = 1;
 
-            // Slider input counts as a user gesture on iOS — safe to create/resume context.
-            const ctx = getAudioContext();
-            if (ctx && ctx.state === 'suspended') {
-                ctx.resume().catch(() => {});
-            }
-            ensureAllContentAudioGraphs();
-
-            if (masterGain) {
-                masterGain.gain.value = masterVolume;
-            } else {
-                // Fallback: scale element volumes directly (non-iOS / no Web Audio)
-                const els = [primaryAudio, aux1Audio, aux1CrossfadeAudio, transitionAudioA, transitionAudioB];
-                els.forEach(el => {
-                    if (!el) return;
-                    const nodes = audioGraphNodes.get(el);
-                    const authored = nodes ? nodes.gain.gain.value : 1;
-                    try {
-                        el.volume = Math.max(0, Math.min(1, authored * masterVolume));
-                    } catch (_) { /* ignore */ }
-                });
-            }
+            const els = [primaryAudio, aux1Audio, aux1CrossfadeAudio, transitionAudioA, transitionAudioB];
+            els.forEach(el => {
+                if (!el) return;
+                const authored = authoredVolume.has(el) ? authoredVolume.get(el) : 1;
+                try {
+                    el.volume = Math.max(0, Math.min(1, authored * masterVolume));
+                } catch (_) { /* ignore */ }
+            });
 
             const slider = document.getElementById('volumeSlider');
             if (slider) slider.value = String(Math.round(masterVolume * 100));
@@ -2865,9 +2797,11 @@
             const onInput = () => setMasterVolume(parseInt(slider.value, 10) / 100);
             slider.addEventListener('input', onInput);
             slider.addEventListener('change', onInput);
-            // Don't wire MediaElementSource here — iOS needs a user gesture first.
-            // primeAudioContext() / setElementVolume() connect on interaction.
-            if (masterGain) masterGain.gain.value = masterVolume;
+            setElementVolume(primaryAudio, 1);
+            setElementVolume(aux1Audio, 1);
+            setElementVolume(aux1CrossfadeAudio, 0);
+            setElementVolume(transitionAudioA, 1);
+            setElementVolume(transitionAudioB, 1);
         }
 
         const isSafari = /Safari/.test(navigator.userAgent) &&
@@ -4228,12 +4162,6 @@
         // Prime audio context during user gesture - helps Safari mobile
         // remember the gesture through async transitions
         function primeAudioContext() {
-            const ctx = getAudioContext();
-            if (ctx && ctx.state === 'suspended') {
-                ctx.resume().catch(() => {});
-            }
-            ensureAllContentAudioGraphs();
-            if (masterGain) masterGain.gain.value = masterVolume;
             const silentAudio = new Audio(silentDataUri);
             silentAudio.volume = 0;
             silentAudio.play().catch(() => {});
