@@ -2208,6 +2208,11 @@
             flex-shrink: 0;
         }
 
+        /* iOS/iPadOS ignore HTMLMediaElement.volume — hide in-app slider */
+        .volume-control.is-ios-hidden {
+            display: none !important;
+        }
+
         .volume-label {
             display: flex;
             color: var(--text-dim);
@@ -2380,6 +2385,112 @@
                 --terrain-ui-progress-h: 40px;
             }
         }
+
+        /* ===========================================
+           DRIFT MODE
+           =========================================== */
+        .drift-btn {
+            width: var(--terrain-ui-sidebar-btn);
+            height: var(--terrain-ui-sidebar-btn);
+            min-width: var(--terrain-ui-sidebar-btn);
+            padding: 0;
+            border: none;
+            background: transparent url('assets/ui/button-drift.png') center / contain no-repeat;
+            color: var(--text-dim);
+            cursor: pointer;
+            display: block;
+            flex-shrink: 0;
+            transition: filter 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .drift-btn svg {
+            display: none;
+        }
+
+        .drift-btn:hover {
+            filter: brightness(1.08);
+        }
+
+        .drift-btn:active {
+            filter: brightness(0.92);
+        }
+
+        .drift-btn:focus-visible {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 4px;
+            border-radius: 8px;
+        }
+
+        .drift-btn.drift-on {
+            animation: drift-breathe 3.2s ease-in-out infinite;
+        }
+
+        @keyframes drift-breathe {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Drift is a public-exploration mode; hidden in convo */
+        body.terrain-convo .drift-btn {
+            display: none !important;
+        }
+
+        /* Breathing indicator inside the progress field while drifting */
+        .drift-glyph {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            color: var(--text-dim);
+            opacity: 0;
+            pointer-events: none;
+            line-height: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .drift-glyph svg {
+            width: 16px;
+            height: 16px;
+            display: block;
+        }
+
+        body.drift-active .drift-glyph {
+            opacity: 1;
+            animation: drift-breathe 3.2s ease-in-out infinite;
+        }
+
+        /* Chrome recedes while drifting; skip key stays live ("not this, keep drifting") */
+        body.drift-active .keypad .key,
+        body.drift-active .links-area,
+        body.drift-active .start-home-btn,
+        body.drift-active .index-btn,
+        body.drift-active .volume-control,
+        body.drift-active .carousel-nav-strip {
+            opacity: 0.38;
+            transition: opacity 0.6s ease;
+        }
+
+        body.drift-active .keypad .key[data-key="next"] {
+            opacity: 1;
+        }
+
+        /* Deep quiet after sustained drifting — chrome nearly vanishes.
+           Safe to leave clickable: while drifting, any tap is consumed as "linger". */
+        body.drift-active.drift-quiet .keypad .key,
+        body.drift-active.drift-quiet .links-area,
+        body.drift-active.drift-quiet .start-home-btn,
+        body.drift-active.drift-quiet .index-btn,
+        body.drift-active.drift-quiet .volume-control,
+        body.drift-active.drift-quiet .carousel-nav-strip {
+            opacity: 0.06;
+            transition: opacity 1.4s ease;
+        }
+
+        body.drift-active.drift-quiet .keypad .key[data-key="next"] {
+            opacity: 0.45;
+        }
     </style>
 </head>
 <body>
@@ -2392,6 +2503,14 @@
             </button>
                 <button type="button" class="index-btn terrain-ui-btn" id="indexBtn" aria-label="Index">
                 <span class="sr-only">Index</span>
+            </button>
+            <button type="button" class="drift-btn" id="driftBtn" aria-label="Drift" title="Drift">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <path d="M9.59 4.59A2 2 0 1 1 11 8H2"></path>
+                    <path d="M17.73 7.73A2.5 2.5 0 1 1 19.5 12H2"></path>
+                    <path d="M12.59 19.41A2 2 0 1 0 14 16H2"></path>
+                </svg>
+                <span class="sr-only">Drift</span>
             </button>
             <div class="volume-control" title="Volume">
                 <label class="volume-label" for="volumeSlider" aria-hidden="true">
@@ -2582,6 +2701,13 @@
                 <div class="input-field" id="inputField">
                     <div class="progress-bar" id="progressBar"></div>
                     <span class="progress-text" id="progressText">To view a shared link, press the power button</span>
+                    <span class="drift-glyph" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.59 4.59A2 2 0 1 1 11 8H2"></path>
+                            <path d="M17.73 7.73A2.5 2.5 0 1 1 19.5 12H2"></path>
+                            <path d="M12.59 19.41A2 2 0 1 0 14 16H2"></path>
+                        </svg>
+                    </span>
                     <div class="progress-frame" aria-hidden="true"></div>
                 </div>
             </div>
@@ -2790,6 +2916,26 @@
         }
 
         function initVolumeControl() {
+            // iPhone/iPod, plus iPads that report as Mac but are touch devices
+            const isIOS = /iPhone|iPod/.test(navigator.userAgent) ||
+                (navigator.userAgent.includes('Mac') && navigator.maxTouchPoints > 1);
+
+            const volumeControl = document.querySelector('.volume-control');
+            if (isIOS) {
+                if (volumeControl) {
+                    volumeControl.classList.add('is-ios-hidden');
+                    volumeControl.setAttribute('hidden', '');
+                    volumeControl.setAttribute('aria-hidden', 'true');
+                }
+                // Leave masterVolume at 1 — hardware buttons control output on iOS
+                setElementVolume(primaryAudio, 1);
+                setElementVolume(aux1Audio, 1);
+                setElementVolume(aux1CrossfadeAudio, 0);
+                setElementVolume(transitionAudioA, 1);
+                setElementVolume(transitionAudioB, 1);
+                return;
+            }
+
             loadMasterVolume();
             const slider = document.getElementById('volumeSlider');
             if (!slider) return;
@@ -3922,12 +4068,13 @@
             
             const timestamp = Date.now();
             
-            // Always add to session journey
+            // Always add to session journey (drift flag = carried here, not steered here)
             navigatorState.sessionJourney.push({
                 nodeId: node.id,
                 title: node.title,
                 type: node.type,
-                timestamp: timestamp
+                timestamp: timestamp,
+                drift: (typeof driftActive !== 'undefined' && driftActive) ? true : undefined
             });
             
             // Trim oldest entries if over limit
@@ -4801,6 +4948,8 @@
             // Reset auto-advance timer on manual navigation
             if (isManual) {
                 resetCarouselAutoAdvance();
+                // Flipping through the images is engagement — stay here
+                if (typeof driftActive !== 'undefined' && driftActive) lingerDrift();
             }
         }
 
@@ -4874,7 +5023,7 @@
             if (!hasPrimary && (hasAux1 || hasChoices)) {
                 progressBar.style.width = '0%';
                 if (!isAddressMode && inputValue.length === 0) {
-                    progressText.textContent = 'Make a choice when ready';
+                    progressText.textContent = driftActive ? 'Drifting' : 'Make a choice when ready';
                 }
                 return;
             }
@@ -5024,6 +5173,9 @@
         // Scrub on click (works for both audio and video)
         inputField.addEventListener('click', (e) => {
             if (isAddressMode || inputValue.length > 0) return;
+
+            // Scrubbing while drifting means staying — linger, then allow the seek
+            if (typeof driftActive !== 'undefined' && driftActive) lingerDrift();
             
             const media = getActiveMediaElement();
             if (!media.src || !media.duration) return;
@@ -5574,7 +5726,7 @@
             // For aux1-only nodes (no primary audio), show guidance message directly
             if (!node.audio?.primary && (node.audio?.aux1 || (node.choices && node.choices.length > 0))) {
                 progressBar.style.width = '0%';
-                progressText.textContent = 'Make a choice when ready';
+                progressText.textContent = driftActive ? 'Drifting' : 'Make a choice when ready';
                 
                 // Start timed video if present (no primary audio to trigger it)
                 if (timedVideo && timedVideo.parentNode) {
@@ -5724,7 +5876,9 @@
             PerfMonitor.start('enterNode');
             enterNode(node, versionAtEnter);
             PerfMonitor.end('enterNode', node.id);
-            
+
+            if (driftActive) onDriftNodeEntered(node);
+
             PerfMonitor.end('loadNode-total', node.id);
         }
 
@@ -6353,7 +6507,7 @@
 
             if (!hasPrimary && (hasAux1 || hasChoices)) {
                 progressBar.style.width = '0%';
-                progressText.textContent = 'Make a choice when ready';
+                progressText.textContent = driftActive ? 'Drifting' : 'Make a choice when ready';
                 return;
             }
 
@@ -6599,7 +6753,17 @@
                 console.log('Keypad disabled until app starts');
                 return;
             }
-            
+
+            // Drifting: skip key advances the walk; any other key is consumed as "linger"
+            if (driftActive) {
+                if (key === 'next') {
+                    driftSkip();
+                    return;
+                }
+                lingerDrift();
+                return;
+            }
+
             if (key === 'DEL') {
                 // Note: Video restart is handled by 'prev' key (<<), not DEL/RTN
                 // This allows RTN to step back in history even during video playback
@@ -7017,6 +7181,10 @@
             const deepLinkNode = getDeepLinkNodeId();
             loadNode(deepLinkNode || manifest.terrain.startNode);
             clearDeepLinkHash();
+            if (driftPendingStart) {
+                driftPendingStart = false;
+                startDrift();
+            }
         }
 
         function finalizeBootUI() {
@@ -7050,7 +7218,10 @@
 
         function handleStartHome() {
             if (!manifest) return;
-            
+
+            // Going home is taking the wheel
+            if (driftActive) stopDrift();
+
             // Sound is played on mousedown, not here
             unlockAudio();
             primeAudioContext();
@@ -7128,6 +7299,342 @@
                 }, sourceNode);
             }
         }
+
+        // ===========================================
+        // DRIFT MODE - passive weighted wander
+        // ===========================================
+        // Explicit entry (sidebar button or ?drift=1). While drifting:
+        // - nodes with primary audio advance when the audio ends (never cut mid-play)
+        // - visual-only / looping / aux-only nodes advance on a dwell timer
+        // - a short "breath" gap separates arrival from departure
+        // - first tap anywhere = linger (halt drift, stay on node); skip key = next node
+        // - authored autoNext always wins over the drift picker
+        // Streams (Infinity duration) hold forever unless the node sets driftDwellMs.
+        let driftActive = false;
+        let driftPendingStart = false;
+        let driftRecentNodes = [];
+        let driftDwellTimerId = null;
+        let driftBreathTimerId = null;
+        let driftVideoStartTimerId = null;
+        let driftQuietTimerId = null;
+
+        const DRIFT_RECENT_MAX = 3;
+        const DRIFT_QUIET_DELAY_MS = 10000;
+
+        const driftBtn = document.getElementById('driftBtn');
+
+        function driftDwellMs() {
+            const v = Number(siteConfig?.drift?.dwellMs);
+            return Number.isFinite(v) && v > 0 ? v : 20000;
+        }
+
+        function driftBreathMs() {
+            const v = Number(siteConfig?.drift?.breathMs);
+            return Number.isFinite(v) && v >= 0 ? v : 1500;
+        }
+
+        /** driftHold: "full" — natural length of this node's dwell-class media, or null
+            if it has none (static visual → caller falls back to the global default). */
+        function driftFullHoldMs(node) {
+            // Looping/repeating primary audio: one full pass
+            if (isAudioRepeat(node) && primaryAudio.src) {
+                if (Number.isFinite(primaryAudio.duration) && primaryAudio.duration > 0) {
+                    return Math.round(primaryAudio.duration * 1000);
+                }
+                return null; // metadata not loaded yet — caller re-arms on loadedmetadata
+            }
+            // Auto-advancing carousel: one full rotation (every image shown once)
+            const imgCount = Array.isArray(node.images) ? node.images.length : 0;
+            if (imgCount > 1 && Number(node.imageAutoAdvance) > 0) {
+                return imgCount * Number(node.imageAutoAdvance);
+            }
+            return null;
+        }
+
+        function armDriftDwell(ms) {
+            if (driftDwellTimerId) window.clearTimeout(driftDwellTimerId);
+            driftDwellTimerId = window.setTimeout(() => {
+                driftDwellTimerId = null;
+                if (driftActive) driftAdvanceAfterBreath();
+            }, ms);
+        }
+
+        function clearDriftTimers() {
+            if (driftDwellTimerId) { window.clearTimeout(driftDwellTimerId); driftDwellTimerId = null; }
+            if (driftBreathTimerId) { window.clearTimeout(driftBreathTimerId); driftBreathTimerId = null; }
+            if (driftVideoStartTimerId) { window.clearTimeout(driftVideoStartTimerId); driftVideoStartTimerId = null; }
+        }
+
+        function scheduleDriftQuiet() {
+            if (driftQuietTimerId) window.clearTimeout(driftQuietTimerId);
+            driftQuietTimerId = window.setTimeout(() => {
+                driftQuietTimerId = null;
+                if (driftActive) document.body.classList.add('drift-quiet');
+            }, DRIFT_QUIET_DELAY_MS);
+        }
+
+        function wakeDriftChrome() {
+            if (!driftActive) return;
+            document.body.classList.remove('drift-quiet');
+            scheduleDriftQuiet();
+        }
+
+        function startDrift() {
+            if (driftActive || isConvoMode()) return;
+            if (!manifest) return;
+            if (!appStarted) {
+                // One tap from cold: boot the app, then drift once the start node lands
+                driftPendingStart = true;
+                handleStartHome();
+                return;
+            }
+            driftActive = true;
+            driftRecentNodes = [];
+            document.body.classList.add('drift-active');
+            driftBtn?.classList.add('drift-on');
+            scheduleDriftQuiet();
+            unlockAudio();
+            primeAudioContext();
+            onDriftNodeEntered(currentNode);
+            console.log('Drift: engaged');
+        }
+
+        function stopDrift() {
+            driftPendingStart = false;
+            if (!driftActive) return;
+            driftActive = false;
+            clearDriftTimers();
+            if (driftQuietTimerId) { window.clearTimeout(driftQuietTimerId); driftQuietTimerId = null; }
+            document.body.classList.remove('drift-active', 'drift-quiet');
+            driftBtn?.classList.remove('drift-on');
+            refreshIdleProgressDisplay();
+            console.log('Drift: released');
+        }
+
+        /** First interaction while drifting: halt the walk, stay on this node. */
+        function lingerDrift() {
+            if (!driftActive) return;
+            console.log('Drift: linger at', currentNode?.id);
+            stopDrift();
+        }
+
+        /** "Not this, keep drifting" — advance immediately, transitions intact. */
+        function driftSkip() {
+            if (!driftActive) return;
+            clearDriftTimers();
+            wakeDriftChrome();
+            driftAdvance();
+        }
+
+        /** Node can be a drift destination. `drift: true` opts unlisted nodes in
+            (the wind-only tier); `drift: false` opts any node out. */
+        function driftEligible(n) {
+            if (!n) return false;
+            if (n.drift === false) return false;
+            if (n.video && n.video.youtubeId) return false; // embeds can't autoplay; skip in drift
+            if (n.addressable === false && n.drift !== true) return false;
+            return true;
+        }
+
+        function driftPickTarget() {
+            const node = currentNode;
+            if (!node) return null;
+
+            // Prefer adjacency: outbound choices + interruptible targets
+            let candidates = [
+                ...(node.choices || []).map(c => c && c.target),
+                ...(node.interruptible || []).map(c => c && c.target)
+            ].filter(Boolean).filter(id => id !== node.id);
+
+            candidates = [...new Set(candidates)].filter(id =>
+                driftEligible(manifest?.nodes?.find(x => x.id === id)));
+
+            // No local paths: the wind jumps anywhere in the terrain
+            if (!candidates.length) {
+                candidates = (manifest?.nodes || [])
+                    .filter(n => n.id !== node.id && driftEligible(n))
+                    .map(n => n.id);
+            }
+
+            if (!candidates.length) return null;
+            const fresh = candidates.filter(id => !driftRecentNodes.includes(id));
+            const pool = fresh.length ? fresh : candidates;
+            return pool[Math.floor(Math.random() * pool.length)];
+        }
+
+        function driftAdvance() {
+            if (!driftActive || !currentNode || !manifest) return;
+            clearDriftTimers();
+
+            // Authored flow wins when present
+            let target = currentNode.autoNext || driftPickTarget();
+
+            if (!target) {
+                // Dead end: the wind circles back home to re-seed the walk
+                const home = manifest?.terrain?.startNode;
+                if (home && home !== currentNode.id) {
+                    target = home;
+                } else {
+                    console.log('Drift: nowhere to go, releasing');
+                    stopDrift();
+                    return;
+                }
+            }
+
+            driftRecentNodes.push(currentNode.id);
+            if (driftRecentNodes.length > DRIFT_RECENT_MAX) {
+                driftRecentNodes = driftRecentNodes.slice(-DRIFT_RECENT_MAX);
+            }
+
+            console.log('Drift: wandering to', target);
+            const sourceNode = currentNode;
+            playTransitionThen(() => {
+                loadNode(target);
+            }, sourceNode);
+        }
+
+        function driftAdvanceAfterBreath() {
+            if (!driftActive) return;
+            clearDriftTimers();
+            driftBreathTimerId = window.setTimeout(() => {
+                driftBreathTimerId = null;
+                driftAdvance();
+            }, driftBreathMs());
+        }
+
+        /** Called after each node load (and at drift entry) to plan how this node advances. */
+        function onDriftNodeEntered(node) {
+            clearDriftTimers();
+            if (!driftActive || !node) return;
+
+            // YouTube node reached via authored flow: brief hold, then move on
+            if (node.video && node.video.youtubeId) {
+                armDriftDwell(4000);
+                return;
+            }
+
+            // Video node: auto-start once ready (no interactive stall); ended listener advances
+            if (node.video && node.video.src) {
+                const v = navVersion;
+                const tryStart = () => {
+                    driftVideoStartTimerId = null;
+                    if (!driftActive || v !== navVersion) return;
+                    if (videoState === 'ready') {
+                        startVideo();
+                    } else if (videoState === 'loading') {
+                        driftVideoStartTimerId = window.setTimeout(tryStart, 250);
+                    }
+                };
+                tryStart();
+                return;
+            }
+
+            // Manual-start audio: begin playback (drift means lean back, not wait)
+            if (audioManualState === 'ready') {
+                startPlaybackFromPauseKey();
+                updatePauseIcon();
+            }
+
+            const hasPrimaryAudio = !!(node.audio?.primary ||
+                (node.audio?.type === 'bundle' && node.audio?.files?.length) ||
+                (node.audio?.type === 'playlist' && node.audio?.source));
+            const looping = isAudioRepeat(node);
+            const dwellOverride = Number(node.driftDwellMs);
+            const hasDwellOverride = Number.isFinite(dwellOverride) && dwellOverride > 0;
+
+            if (hasPrimaryAudio && !looping && !hasDwellOverride) {
+                // Ended listener drives advancement. If drift was engaged on a node whose
+                // audio already finished, or playback is stalled-paused, nudge it along.
+                if (primaryAudio.ended) {
+                    driftAdvanceAfterBreath();
+                } else if (primaryAudio.src && primaryAudio.paused && audioManualState === null) {
+                    startPlaybackFromPauseKey();
+                    updatePauseIcon();
+                }
+                return;
+            }
+
+            // Visual-only, looping, aux-only, or author-overridden (e.g. live streams): dwell.
+            // driftHold: "full" holds for the media's natural length (one audio loop, one
+            // carousel rotation); an explicit driftDwellMs wins if both are present.
+            const holdFull = !hasDwellOverride && node.driftHold === 'full';
+            let dwell = hasDwellOverride ? dwellOverride : driftDwellMs();
+
+            if (holdFull) {
+                const fullMs = driftFullHoldMs(node);
+                if (fullMs) {
+                    dwell = fullMs;
+                } else if (isAudioRepeat(node) && primaryAudio.src) {
+                    // Loop length unknown until metadata arrives — re-arm with the real duration
+                    const v = navVersion;
+                    primaryAudio.addEventListener('loadedmetadata', () => {
+                        if (!driftActive || v !== navVersion) return;
+                        if (Number.isFinite(primaryAudio.duration) && primaryAudio.duration > 0) {
+                            armDriftDwell(Math.round(primaryAudio.duration * 1000));
+                        }
+                    }, { once: true });
+                }
+            }
+
+            armDriftDwell(dwell);
+        }
+
+        /** Persistent 'ended' listener on primaryAudio (survives teardown's onended = null). */
+        function onDriftPrimaryEnded() {
+            if (!driftActive) return;
+            const v = navVersion;
+            // Defer past same-event handlers (playlist advance, authored autoNext)
+            window.setTimeout(() => {
+                if (!driftActive || v !== navVersion || !currentNode) return;
+                if (currentNode.autoNext) return;       // authored flow advances
+                if (currentPlaylist) return;            // playlist continuing to next track
+                if (isAudioRepeat(currentNode) || primaryAudio.loop) return;
+                driftAdvanceAfterBreath();
+            }, 80);
+        }
+
+        function onDriftVideoEnded() {
+            if (!driftActive) return;
+            const v = navVersion;
+            window.setTimeout(() => {
+                if (!driftActive || v !== navVersion || !currentNode) return;
+                if (!(currentNode.video && currentNode.video.src)) return;
+                driftAdvanceAfterBreath();
+            }, 80);
+        }
+
+        primaryAudio.addEventListener('ended', onDriftPrimaryEnded);
+        viewportVideo.addEventListener('ended', onDriftVideoEnded);
+
+        driftBtn?.addEventListener('click', () => {
+            if (driftActive) {
+                lingerDrift();
+            } else {
+                startDrift();
+            }
+        });
+
+        // Tap on the viewport while drifting = linger (stay with what caught your eye)
+        viewport.addEventListener('click', () => {
+            if (driftActive) lingerDrift();
+        });
+
+        // Opening the Navigator counts as taking the wheel
+        indexBtn?.addEventListener('click', () => {
+            if (driftActive) lingerDrift();
+        });
+
+        // Pointer movement wakes the chrome without lingering
+        document.addEventListener('pointermove', () => {
+            if (driftActive) wakeDriftChrome();
+        });
+
+        // ?drift=1 deep link: arm drift; the power tap (audio-unlock gesture) sets it off
+        try {
+            if (new URLSearchParams(window.location.search).get('drift') === '1') {
+                driftPendingStart = true;
+            }
+        } catch (_) { /* ignore */ }
 
         // ===========================================
         // EVENT LISTENERS
@@ -7341,7 +7848,8 @@
             navigatorState.sessionJourney.forEach((item, index) => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'breadcrumb-item';
-                itemDiv.textContent = `${item.nodeId} - ${item.title}`;
+                itemDiv.textContent = `${item.drift ? '⤳ ' : ''}${item.nodeId} - ${item.title}`;
+                if (item.drift) itemDiv.title = 'Arrived by drifting';
                 list.appendChild(itemDiv);
                 
                 if (index < navigatorState.sessionJourney.length - 1) {
