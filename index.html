@@ -2432,7 +2432,8 @@
         }
 
         /* Drift is a public-exploration mode; hidden in convo */
-        body.terrain-convo .drift-btn {
+        body.terrain-convo .drift-btn,
+        .drift-btn[hidden] {
             display: none !important;
         }
 
@@ -3211,10 +3212,8 @@
 
         function afterManifestLoad() {
             terrainMode = manifest?.terrain?.mode || siteConfig?.mode || 'public';
-
-            if (isConvoMode()) {
-                document.body.classList.add('terrain-convo');
-            }
+            syncDriftAvailability();
+            armDriftFromQuery();
 
             if (!isConvoMode()) {
                 progressText.textContent = 'Have a shared link? Press power';
@@ -5371,6 +5370,12 @@
                 siteConfig = cfg;
                 applyBootImage(cfg.startImage);
 
+                // Apply mode chrome early (before manifest) so Drift never flashes on convo
+                if (cfg.mode === 'convo' || cfg.mode === 'public') {
+                    terrainMode = cfg.mode;
+                }
+                syncDriftAvailability();
+
                 // Page title
                 if (cfg.title) document.title = cfg.title;
 
@@ -7181,7 +7186,7 @@
             const deepLinkNode = getDeepLinkNodeId();
             loadNode(deepLinkNode || manifest.terrain.startNode);
             clearDeepLinkHash();
-            if (driftPendingStart) {
+            if (driftPendingStart && isDriftAvailable()) {
                 driftPendingStart = false;
                 startDrift();
             }
@@ -7379,8 +7384,34 @@
             scheduleDriftQuiet();
         }
 
+        /** Drift is public-exploration only — never available in convo installs. */
+        function isDriftAvailable() {
+            return !isConvoMode();
+        }
+
+        function syncDriftAvailability() {
+            if (isConvoMode()) {
+                document.body.classList.add('terrain-convo');
+                driftPendingStart = false;
+                if (driftActive) stopDrift();
+                if (driftBtn) {
+                    driftBtn.hidden = true;
+                    driftBtn.setAttribute('aria-hidden', 'true');
+                    driftBtn.tabIndex = -1;
+                    driftBtn.classList.remove('drift-on');
+                }
+                return;
+            }
+            document.body.classList.remove('terrain-convo');
+            if (driftBtn) {
+                driftBtn.hidden = false;
+                driftBtn.removeAttribute('aria-hidden');
+                driftBtn.removeAttribute('tabindex');
+            }
+        }
+
         function startDrift() {
-            if (driftActive || isConvoMode()) return;
+            if (driftActive || !isDriftAvailable()) return;
             if (!manifest) return;
             if (!appStarted) {
                 // One tap from cold: boot the app, then drift once the start node lands
@@ -7607,6 +7638,7 @@
         viewportVideo.addEventListener('ended', onDriftVideoEnded);
 
         driftBtn?.addEventListener('click', () => {
+            if (!isDriftAvailable()) return;
             if (driftActive) {
                 lingerDrift();
             } else {
@@ -7629,12 +7661,18 @@
             if (driftActive) wakeDriftChrome();
         });
 
-        // ?drift=1 deep link: arm drift; the power tap (audio-unlock gesture) sets it off
-        try {
-            if (new URLSearchParams(window.location.search).get('drift') === '1') {
-                driftPendingStart = true;
+        // ?drift=1 deep link: arm after config/manifest know the mode (skipped on convo)
+        function armDriftFromQuery() {
+            if (!isDriftAvailable()) {
+                driftPendingStart = false;
+                return;
             }
-        } catch (_) { /* ignore */ }
+            try {
+                if (new URLSearchParams(window.location.search).get('drift') === '1') {
+                    driftPendingStart = true;
+                }
+            } catch (_) { /* ignore */ }
+        }
 
         // ===========================================
         // EVENT LISTENERS
