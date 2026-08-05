@@ -1,7 +1,7 @@
 {
   "terrain": {
     "id": "repo01",
-    "title": "creative repo",
+    "title": "Public Intercept",
     "version": "1.0",
     "startNode": "0.0",
     "mediaBase": "https://media.matthewsigmon.com/repo",
@@ -29,7 +29,8 @@
       "links": [],
       "tags": [],
       "textTitle": "IMPORTANT!",
-      "text": "Have a nice day. \n\nOR ELSE."
+      "text": "Have a nice day. \n\nOR ELSE.",
+      "drift": false
     },
     {
       "id": "000.0",
@@ -73,15 +74,16 @@
       "interruptible": [],
       "links": [],
       "tags": [],
-      "imageAutoAdvance": 7000
+      "imageAutoAdvance": 7000,
+      "drift": false
     },
     {
       "id": "100.1",
-      "title": "It Rained All Day - options",
+      "title": "It Rained All Day - Options",
       "type": "connection",
       "audio": {
-        "aux1Crossfade": 8000,
-        "aux1": "https://media.matthewsigmon.com/assets/audio/aux/rain-fx.mp3"
+        "aux1": "https://media.matthewsigmon.com/assets/audio/aux/rain-fx.mp3",
+        "aux1Crossfade": 8000
       },
       "transition": {
         "type": "bundle",
@@ -132,7 +134,8 @@
       "replies": {
         "enabled": true,
         "visible": true
-      }
+      },
+      "drift": false
     },
     {
       "id": "100.1.1",
@@ -262,7 +265,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.0",
@@ -385,7 +389,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.1",
@@ -2418,6 +2423,85 @@
         }
       ],
       "tags": []
+    },
+    {
+      "id": "7.0.1",
+      "title": "Feel It - Song sketch",
+      "type": "destination",
+      "choices": [],
+      "driftHold": "full",
+      "text": "Recorded Jan 14, 1999\n\n## Feel It - Song Sketch\n_Recorded Jan 14, 1999_\n\n\nYou can push on love\n'Cause love will push on you\nMake your plans and take your stands\nDoes it take you where you want it to?\nWhen the words are nowhere found\nYou and silence find common ground\n\n**Chorus:**\nAnd you feel it\nYou've got to feel it\nIf you want to live\nOh can you feel it?\nFeel it and give\nWhat you have to give\n\nSometimes it hurts you\nSometimes it heals\nSometimes it brings riches untold\nAnd sometimes it steals\nSometimes you've got to throw away\nThe rules you'd rather \nMake the wind obey\n\n**Chorus**\n",
+      "textTitle": "More information",
+      "textPauseAudio": false,
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "audio": {
+        "primary": "assets/audio/nodes/7.0.1/Feel-It.m4a",
+        "repeat": true
+      },
+      "images": [
+        {
+          "src": "assets/images/nodes/7.0.1/7.0.1A.jpg",
+          "caption": ""
+        },
+        {
+          "src": "assets/images/nodes/7.0.1/7.0.1B.jpg",
+          "caption": ""
+        }
+      ],
+      "imageAutoAdvance": 10000
+    },
+    {
+      "id": "5.0.1",
+      "title": "Just the rain.",
+      "type": "destination",
+      "choices": [],
+      "driftDwellMs": 200000,
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "audio": {
+        "aux1": "https://media.matthewsigmon.com/assets/audio/aux/rain-fx.mp3",
+        "aux1Crossfade": 6000
+      },
+      "visuals": [
+        {
+          "type": "video",
+          "src": "https://media.matthewsigmon.com/assets/video/5.0.1/5.0.1.mp4",
+          "start": 0,
+          "duration": 0,
+          "persist": true,
+          "loop": true
+        }
+      ],
+      "textPauseAudio": false
     }
   ]
 }
