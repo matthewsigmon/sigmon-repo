@@ -15,7 +15,22 @@
       "audio": {
         "aux1": "https://media.matthewsigmon.com/assets/audio/aux/094472-aux.mp3"
       },
-      "transition": {},
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
       "visuals": [
         {
           "type": "image",
@@ -24,13 +39,35 @@
           "duration": 0
         }
       ],
-      "choices": [],
+      "choices": [
+        {
+          "key": "1",
+          "label": "Public What?",
+          "target": "0.1"
+        },
+        {
+          "key": "2",
+          "label": "Retrospect - Past Projects",
+          "target": "000.0"
+        }
+      ],
       "interruptible": [],
       "links": [],
       "tags": [],
       "textTitle": "IMPORTANT!",
       "text": "Have a nice day. \n\nOR ELSE.",
-      "drift": false
+      "drift": false,
+      "images": [
+        {
+          "src": "assets/images/nodes/0.0/0.0A.jpg",
+          "caption": ""
+        },
+        {
+          "src": "assets/images/nodes/0.0/0.0B.jpg",
+          "caption": ""
+        }
+      ],
+      "imageAutoAdvance": 10000
     },
     {
       "id": "000.0",
@@ -2423,6 +2460,64 @@
         }
       ],
       "tags": []
+    },
+    {
+      "id": "0.1",
+      "title": "Public What?",
+      "type": "destination",
+      "choices": [
+        {
+          "key": "1",
+          "label": "Why I made this platform",
+          "target": "000.0"
+        },
+        {
+          "key": "2",
+          "label": "About the Navigator Index",
+          "target": "000.0"
+        }
+      ],
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "drift": false,
+      "links": [
+        {
+          "text": "More info on Terrain",
+          "url": "https://www.terrainapp.org"
+        }
+      ],
+      "audio": {
+        "primary": "assets/audio/nodes/0.1/0.1.m4a",
+        "repeat": true
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/0.1/0.1A.jpg",
+          "start": 0,
+          "duration": 0
+        },
+        {
+          "type": "image",
+          "src": "assets/images/nodes/0.1/0.1B.jpg",
+          "start": 37000,
+          "duration": 83000
+        }
+      ]
     },
     {
       "id": "7.0.1",
