@@ -31,14 +31,7 @@
         ],
         "mode": "random_tracked"
       },
-      "visuals": [
-        {
-          "type": "image",
-          "src": "assets/images/0.0.jpg",
-          "start": 0,
-          "duration": 0
-        }
-      ],
+      "visuals": [],
       "choices": [
         {
           "key": "1",
