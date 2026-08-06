@@ -6,6 +6,20 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <base href="/">
     <title>Sigmon - A Set of Something</title>
+
+    <!-- Terrain default link preview:start -->
+    <meta name="description" content="A set of something from Sigmon.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Sigmon">
+    <meta property="og:title" content="Sigmon - A Set of Something">
+    <meta property="og:description" content="A set of something from Sigmon.">
+    <meta property="og:image" content="https://media.matthewsigmon.com/repo/assets/images/start.jpg">
+    <meta property="og:url" content="https://repo.matthewsigmon.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sigmon - A Set of Something">
+    <meta name="twitter:description" content="A set of something from Sigmon.">
+    <meta name="twitter:image" content="https://media.matthewsigmon.com/repo/assets/images/start.jpg">
+    <!-- Terrain default link preview:end -->
     
     <!-- PWA Support -->
     <link rel="manifest" href="/site.webmanifest">
@@ -2998,14 +3012,21 @@
         const CONVO_PIN_MAX_ATTEMPTS = 3;
 
         // ===========================================
-        // DEEP LINK - Read #node= from URL hash
+        // DEEP LINK - Read /node/:address or the legacy #node= URL hash
         // ===========================================
         function getDeepLinkNodeId() {
-            const hash = window.location.hash; // e.g. "#node=1.10"
-            if (!hash) return null;
-            const match = hash.match(/^#node=(.+)$/);
-            if (!match) return null;
-            const nodeId = decodeURIComponent(match[1]);
+            const pathMatch = window.location.pathname.match(/^\/node\/([^/]+)\/?$/);
+            const hashMatch = window.location.hash.match(/^#node=(.+)$/);
+            const encodedNodeId = pathMatch?.[1] || hashMatch?.[1];
+            if (!encodedNodeId) return null;
+
+            let nodeId;
+            try {
+                nodeId = decodeURIComponent(encodedNodeId);
+            } catch (_) {
+                console.log('Deep link: invalid node encoding');
+                return null;
+            }
             // Validate: node must exist, be addressable, and be shareable
             const node = manifest?.nodes?.find(n => n.id === nodeId);
             if (!node) {
@@ -6064,7 +6085,7 @@
                         shareUrl = `${window.location.origin}${window.location.pathname}#node=${encodeURIComponent(currentNode.id)}`;
                     }
                 } else if (currentNode.addressable !== false) {
-                    shareUrl = `${window.location.origin}${window.location.pathname}#node=${encodeURIComponent(currentNode.id)}`;
+                    shareUrl = `${window.location.origin}/node/${encodeURIComponent(currentNode.id)}`;
                 }
 
                 if (shareUrl) {
