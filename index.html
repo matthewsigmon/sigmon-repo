@@ -2536,6 +2536,85 @@
         body.drift-active.drift-quiet .keypad .key[data-key="next"] {
             opacity: 0.45;
         }
+
+        /* ===========================================
+           MANIFEST FRESHNESS NOTICE
+           =========================================== */
+        .terrain-update-notice {
+            position: fixed;
+            top: max(12px, env(safe-area-inset-top));
+            left: 50%;
+            z-index: 4000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: min(560px, calc(100vw - 24px));
+            padding: 10px 12px 10px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 12px;
+            background: rgba(24, 26, 29, 0.96);
+            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.42);
+            color: #f4f4f4;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -12px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .terrain-update-notice.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, 0);
+        }
+
+        .terrain-update-message {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .terrain-update-action,
+        .terrain-update-later {
+            flex: 0 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 8px;
+            padding: 7px 10px;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+            font: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .terrain-update-action {
+            border-color: var(--accent-primary);
+            color: #111418;
+            background: var(--accent-primary);
+        }
+
+        .terrain-update-action:focus-visible,
+        .terrain-update-later:focus-visible {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 520px) {
+            .terrain-update-notice {
+                gap: 8px;
+                padding-left: 12px;
+                font-size: 12px;
+            }
+
+            .terrain-update-action,
+            .terrain-update-later {
+                padding: 7px 8px;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2790,6 +2869,12 @@
         </div>
     </div>
 
+    <div id="terrainUpdateNotice" class="terrain-update-notice" role="status" aria-live="polite" aria-hidden="true">
+        <span class="terrain-update-message">Terrain has been updated.</span>
+        <button type="button" id="terrainUpdateAction" class="terrain-update-action">Update</button>
+        <button type="button" id="terrainUpdateLater" class="terrain-update-later">Later</button>
+    </div>
+
     <div id="debugHud" style="position:fixed;left:10px;bottom:10px;z-index:2000;background:rgba(0,0,0,0.75);padding:10px;border-radius:8px;font:12px/1.3 monospace;color:#eee;display:none;max-width:60vw;white-space:pre;"></div>
 
     <script>
@@ -2890,6 +2975,14 @@
         let currentNode = null;
         let inputValue = '';
         let appStarted = false;
+        let loadedManifestToken = '';
+        let pendingManifestToken = '';
+        let dismissedManifestToken = '';
+        let manifestFreshnessCheck = null;
+        let lastManifestFreshnessCheckAt = 0;
+        let manifestRefreshInProgress = false;
+        const MANIFEST_FRESHNESS_INTERVAL_MS = 5000;
+        const TERRAIN_UPDATE_RESUME_NODE_KEY = 'terrain_update_resume_node';
         let isAddressMode = false;
         let isTwoDigitMode = false;
         let twoDigitBuffer = '';
@@ -5481,12 +5574,101 @@
         // ===========================================
         // LOAD MANIFEST
         // ===========================================
+        function manifestBodyToken(text) {
+            let hash = 2166136261;
+            for (let i = 0; i < text.length; i++) {
+                hash ^= text.charCodeAt(i);
+                hash = Math.imul(hash, 16777619);
+            }
+            return `body:${text.length}:${(hash >>> 0).toString(16)}`;
+        }
+
+        function manifestResponseToken(response, text) {
+            const etag = response.headers.get('etag');
+            return etag ? `etag:${etag}` : manifestBodyToken(text);
+        }
+
+        function showManifestUpdateNotice() {
+            const notice = document.getElementById('terrainUpdateNotice');
+            if (!notice || !pendingManifestToken || dismissedManifestToken === pendingManifestToken) return;
+            notice.classList.add('active');
+            notice.setAttribute('aria-hidden', 'false');
+        }
+
+        function hideManifestUpdateNotice() {
+            const notice = document.getElementById('terrainUpdateNotice');
+            if (!notice) return;
+            notice.classList.remove('active');
+            notice.setAttribute('aria-hidden', 'true');
+        }
+
+        function reloadForManifestUpdate() {
+            if (manifestRefreshInProgress) return;
+            manifestRefreshInProgress = true;
+            hideManifestUpdateNotice();
+
+            try {
+                if (currentNode?.id) {
+                    sessionStorage.setItem(TERRAIN_UPDATE_RESUME_NODE_KEY, currentNode.id);
+                }
+            } catch (_) { /* session storage may be unavailable */ }
+
+            const url = new URL(window.location.href);
+            url.searchParams.set('_terrainRefresh', Date.now().toString());
+            window.location.replace(url.href);
+        }
+
+        function consumeManifestUpdateResumeNode() {
+            try {
+                const nodeId = sessionStorage.getItem(TERRAIN_UPDATE_RESUME_NODE_KEY);
+                sessionStorage.removeItem(TERRAIN_UPDATE_RESUME_NODE_KEY);
+                if (nodeId && manifest?.nodes?.some(node => node.id === nodeId)) return nodeId;
+            } catch (_) { /* session storage may be unavailable */ }
+            return null;
+        }
+
+        async function checkManifestFreshness({ force = false, reason = 'resume' } = {}) {
+            if (!loadedManifestToken || manifestRefreshInProgress || document.visibilityState === 'hidden') return;
+            if (pendingManifestToken) {
+                showManifestUpdateNotice();
+                return;
+            }
+            if (manifestFreshnessCheck) return manifestFreshnessCheck;
+
+            const now = Date.now();
+            if (!force && now - lastManifestFreshnessCheckAt < MANIFEST_FRESHNESS_INTERVAL_MS) return;
+            lastManifestFreshnessCheckAt = now;
+
+            manifestFreshnessCheck = (async () => {
+                try {
+                    const response = await fetch('/manifest.json', { cache: 'no-cache' });
+                    if (!response.ok) throw new Error(`Manifest freshness check returned ${response.status}`);
+                    const text = await response.text();
+                    const nextToken = manifestResponseToken(response, text);
+                    if (nextToken === loadedManifestToken) return;
+
+                    pendingManifestToken = nextToken;
+                    console.log(`Manifest update detected after ${reason}`);
+                    if (!appStarted && !isLoading) reloadForManifestUpdate();
+                    else showManifestUpdateNotice();
+                } catch (error) {
+                    console.log('Manifest freshness check skipped:', error.message);
+                } finally {
+                    manifestFreshnessCheck = null;
+                }
+            })();
+
+            return manifestFreshnessCheck;
+        }
+
         async function loadManifest() {
             PerfMonitor.start('manifest-load');
             try {
-                const response = await fetch('/manifest.json');
+                const response = await fetch('/manifest.json', { cache: 'no-cache' });
                 if (!response.ok) throw new Error('Failed to load manifest.json');
-                manifest = await response.json();
+                const text = await response.text();
+                loadedManifestToken = manifestResponseToken(response, text);
+                manifest = JSON.parse(text);
                 perfOverrides = manifest.perfOverrides || {};
                 mediaBase = manifest.terrain.mediaBase || '';
                 PerfMonitor.end('manifest-load', `${manifest.nodes?.length || 0} nodes`);
@@ -7245,8 +7427,9 @@
         function enterStartNodeFromBoot(versionAtSchedule = navVersion) {
             if (versionAtSchedule !== navVersion) return;
             clearBootImageIfShowing();
+            const refreshedNode = consumeManifestUpdateResumeNode();
             const deepLinkNode = getDeepLinkNodeId();
-            loadNode(deepLinkNode || manifest.terrain.startNode);
+            loadNode(refreshedNode || deepLinkNode || manifest.terrain.startNode);
             clearDeepLinkHash();
             if (driftPendingStart && isDriftAvailable()) {
                 driftPendingStart = false;
@@ -7772,16 +7955,29 @@
 
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden') pauseForBackground();
-            else attemptResumeFromBackground();
+            else {
+                attemptResumeFromBackground();
+                checkManifestFreshness({ reason: 'foreground' });
+            }
         });
 
         window.addEventListener('pagehide', pauseForBackground);
-        window.addEventListener('pageshow', () => {
+        window.addEventListener('pageshow', (event) => {
             attemptResumeFromBackground();
+            checkManifestFreshness({ force: event.persisted, reason: event.persisted ? 'page restore' : 'page show' });
         });
 
         window.addEventListener('blur', pauseForBackground);
-        window.addEventListener('focus', attemptResumeFromBackground);
+        window.addEventListener('focus', () => {
+            attemptResumeFromBackground();
+            checkManifestFreshness({ reason: 'focus' });
+        });
+
+        document.getElementById('terrainUpdateAction')?.addEventListener('click', reloadForManifestUpdate);
+        document.getElementById('terrainUpdateLater')?.addEventListener('click', () => {
+            dismissedManifestToken = pendingManifestToken;
+            hideManifestUpdateNotice();
+        });
 
         resumeBtn?.addEventListener('click', async () => {
             unlockAudio();
