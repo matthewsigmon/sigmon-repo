@@ -1325,7 +1325,8 @@
             color: #e88;
         }
 
-        .replies-link {
+        .replies-link,
+        .weathering-link {
             color: var(--accent-primary);
             text-decoration: none;
             cursor: pointer;
@@ -1341,7 +1342,8 @@
             display: block;
         }
 
-        .replies-link:hover {
+        .replies-link:hover,
+        .weathering-link:hover {
             color: var(--accent-primary-hover);
         }
 
@@ -1540,7 +1542,8 @@
                 gap: 15px;
             }
 
-            .replies-link {
+            .replies-link,
+            .weathering-link {
                 flex: 0 0 100%;
                 width: 100%;
                 text-align: center;
@@ -2973,6 +2976,9 @@
         let manifest = null;
         let mediaBase = ''; // Base URL for media assets (from manifest.terrain.mediaBase)
         let currentNode = null;
+        let currentCanonicalNode = null;
+        let currentPresentation = 'original';
+        let weatheringAvailableForCurrentStay = false;
         let inputValue = '';
         let appStarted = false;
         let loadedManifestToken = '';
@@ -5731,6 +5737,76 @@
             return node || null;
         }
 
+        // ===========================================
+        // WEATHERING - remembered return presentations
+        // ===========================================
+        function nodeHasWeathering(node) {
+            return terrainMode !== 'convo' &&
+                node?.indexable !== false &&
+                typeof node?.weathering?.audio?.primary === 'string' &&
+                node.weathering.audio.primary.trim().length > 0 &&
+                !!node?.audio?.primary;
+        }
+
+        function nodeHasBeenVisited(node) {
+            return Number(navigatorState.persistentIndex[node?.id]?.visitCount) > 0;
+        }
+
+        function weatheredNodePresentation(node) {
+            if (!nodeHasWeathering(node)) return node;
+
+            const weatheredAudio = node.weathering.audio;
+            const audio = {
+                ...(node.audio || {}),
+                ...weatheredAudio,
+                type: 'single',
+                primary: weatheredAudio.primary.trim(),
+                // A return acknowledgment normally begins immediately. Authors
+                // can still supply a deliberate offset in Pioneer.
+                primaryTiming: Object.prototype.hasOwnProperty.call(weatheredAudio, 'primaryTiming')
+                    ? Number(weatheredAudio.primaryTiming) || 0
+                    : 0
+            };
+            delete audio.files;
+            delete audio.source;
+
+            return {
+                ...node,
+                audio
+            };
+        }
+
+        function presentationForNodeStay(node) {
+            const useWeathered = nodeHasWeathering(node) && nodeHasBeenVisited(node);
+            return {
+                node: useWeathered ? weatheredNodePresentation(node) : node,
+                presentation: useWeathered ? 'weathered' : 'original',
+                canSwitch: useWeathered
+            };
+        }
+
+        function switchWeatheringPresentation() {
+            if (!weatheringAvailableForCurrentStay || !currentCanonicalNode) return;
+
+            const nextPresentation = currentPresentation === 'weathered' ? 'original' : 'weathered';
+            const nextNode = nextPresentation === 'weathered'
+                ? weatheredNodePresentation(currentCanonicalNode)
+                : currentCanonicalNode;
+            const versionAtEnter = bumpNavVersion();
+
+            nodeEnterWallTime = Date.now();
+            lastTimedVisualKey = null;
+            teardownCurrentNode();
+            currentNode = nextNode;
+            currentPresentation = nextPresentation;
+
+            // This is another presentation of the place the visitor is already
+            // standing in, not another visit or another step in history.
+            prepareNode(nextNode, false);
+            enterNode(nextNode, versionAtEnter);
+            console.log(`Weathering: showing ${nextPresentation} presentation for ${nextNode.id}`);
+        }
+
         function teardownCurrentNode() {
             const textOverlay = document.getElementById('textOverlay');
             if (textOverlay?.classList.contains('active')) {
@@ -5775,9 +5851,10 @@
             hideCarousel();
         }
 
-        function prepareNode(node) {
-            // Add to navigator tracking
-            addToNavigator(node);
+        function prepareNode(node, trackVisit = true) {
+            // Presentation switches stay inside the same canonical node and do
+            // not create another footprint.
+            if (trackVisit) addToNavigator(currentCanonicalNode || node);
 
             // YOUTUBE NODE: Show poster and wait for GO key
             if (node.video && node.video.youtubeId) {
@@ -6058,16 +6135,16 @@
             }
 
             PerfMonitor.start('resolveNode');
-            const node = resolveNode(nodeId);
+            const canonicalNode = resolveNode(nodeId);
             PerfMonitor.end('resolveNode');
-            if (!node) return;
+            if (!canonicalNode) return;
 
             if (isConvoMode() && nodeId !== manifest?.terrain?.startNode) {
                 convoAtLobby = false;
             }
 
             // Track the user's path through the installation (including autoNext and Index jumps)
-            recordHistory(node.id);
+            recordHistory(canonicalNode.id);
 
             // New node load = new version (invalidates stale callbacks)
             const versionAtEnter = bumpNavVersion();
@@ -6077,8 +6154,16 @@
                 audioBookmark = null;
             }
 
+            // Resolve the presentation before addToNavigator increments this
+            // visit. Visit one receives the original; visit two and later may
+            // receive the weathered return layer.
+            const resolvedPresentation = presentationForNodeStay(canonicalNode);
+            const node = resolvedPresentation.node;
+            currentCanonicalNode = canonicalNode;
+            currentPresentation = resolvedPresentation.presentation;
+            weatheringAvailableForCurrentStay = resolvedPresentation.canSwitch;
             currentNode = node;
-            console.log('Loading node:', node.id, node.title);
+            console.log('Loading node:', node.id, node.title, `(${currentPresentation})`);
             closeRepliesOverlay();
 
             // Clean up preload cache - remove entries not relevant to new node
@@ -6258,6 +6343,29 @@
                 a.textContent = link.text;
                 linksArea.appendChild(a);
             });
+
+            // A return visitor may move between the remembered presentation
+            // and the complete first-arrival presentation without navigating.
+            if (weatheringAvailableForCurrentStay && currentCanonicalNode) {
+                const weatheringBtn = document.createElement('button');
+                weatheringBtn.type = 'button';
+                weatheringBtn.className = 'weathering-link';
+                if (currentPresentation === 'weathered') {
+                    weatheringBtn.textContent = 'Hear first arrival';
+                    weatheringBtn.setAttribute(
+                        'aria-label',
+                        'Play the version originally presented on your first visit'
+                    );
+                } else {
+                    weatheringBtn.textContent = 'Return to remembered version';
+                    weatheringBtn.setAttribute(
+                        'aria-label',
+                        'Return to the shorter presentation for a repeat visit'
+                    );
+                }
+                weatheringBtn.addEventListener('click', switchWeatheringPresentation);
+                linksArea.appendChild(weatheringBtn);
+            }
             
             // Add share link if node is shareable (default: true unless explicitly false)
             if (currentNode && currentNode.shareable !== false) {
