@@ -45,7 +45,12 @@
         }
       ],
       "interruptible": [],
-      "links": [],
+      "links": [
+        {
+          "text": "Public Intercept is better as an app! Learn more here.",
+          "url": "https://terrainapp.org/add-to-homescreen.html"
+        }
+      ],
       "tags": [],
       "textTitle": "IMPORTANT!",
       "text": "Have a nice day. \n\nOR ELSE.",
