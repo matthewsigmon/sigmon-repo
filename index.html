@@ -28,7 +28,7 @@
     <!-- iOS PWA Support -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Public Intercept">
+    <meta name="apple-mobile-web-app-title" content="Terrain">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/icons/favicon-32.png">
     <link rel="apple-touch-icon" href="/assets/images/icons/icon-180.png">
     
@@ -1347,6 +1347,13 @@
             color: var(--accent-primary-hover);
         }
 
+        .stream-now-playing {
+            color: var(--accent-primary);
+            font-weight: var(--font-weight-base);
+            line-height: 1.4;
+            display: block;
+        }
+
         .external-link {
             color: #ffffff;
             text-decoration: none;
@@ -1543,7 +1550,8 @@
             }
 
             .replies-link,
-            .weathering-link {
+            .weathering-link,
+            .stream-now-playing {
                 flex: 0 0 100%;
                 width: 100%;
                 text-align: center;
@@ -2979,6 +2987,10 @@
         let currentCanonicalNode = null;
         let currentPresentation = 'original';
         let weatheringAvailableForCurrentStay = false;
+        let currentStreamMetadata = null;
+        let streamMetadataTimerId = null;
+        let streamMetadataAbortController = null;
+        const STREAM_METADATA_POLL_MS = 15000;
         let inputValue = '';
         let appStarted = false;
         let loadedManifestToken = '';
@@ -4005,8 +4017,133 @@
 
         let currentPlaylist = null; // { nodeId, files, currentTrack }
 
+        function isLiveStreamNode(node) {
+            return node?.audio?.type === 'stream' &&
+                typeof node.audio.primary === 'string' &&
+                node.audio.primary.trim().length > 0;
+        }
+
+        function sourceMatchesMetadataMount(source, mount) {
+            if (!mount || !source) return false;
+            const expected = String(mount).startsWith('/') ? String(mount) : `/${mount}`;
+            if (source.mount === expected) return true;
+            try {
+                return new URL(source.listenurl).pathname === expected;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        function normalizeNowPlayingText(value) {
+            const text = String(value || '').replace(/\s+/g, ' ').trim();
+            if (!text) return '';
+            return text.replace(/\s+-\s+/, ' — ');
+        }
+
+        function normalizeStreamMetadata(payload, node) {
+            if (!payload || typeof payload !== 'object') return null;
+
+            let nowPlaying = normalizeNowPlayingText(
+                payload.nowplaying || payload.nowPlaying || payload.currentlyPlaying
+            );
+            let coverArt = payload.coverart || payload.coverArt || '';
+            let listeners = Number(payload.connections ?? payload.listeners);
+
+            const rawSources = payload.icestats?.source;
+            if (!nowPlaying && rawSources) {
+                const sources = Array.isArray(rawSources) ? rawSources : [rawSources];
+                const requestedMount = node?.audio?.metadataMount || '';
+                const source = sources.find(candidate => sourceMatchesMetadataMount(candidate, requestedMount)) || sources[0];
+                if (source) {
+                    const artist = String(source.artist || '').trim();
+                    const title = String(source.title || '').trim();
+                    nowPlaying = artist && title
+                        ? `${artist} — ${title}`
+                        : normalizeNowPlayingText(title);
+                    if (!Number.isFinite(listeners)) listeners = Number(source.listeners);
+                }
+            }
+
+            if (!nowPlaying && !coverArt && !Number.isFinite(listeners)) return null;
+            return {
+                nowPlaying,
+                coverArt: String(coverArt || ''),
+                listeners: Number.isFinite(listeners) ? listeners : null
+            };
+        }
+
+        function streamMetadataLineText(node = currentNode) {
+            if (currentStreamMetadata?.nowPlaying) {
+                return `LIVE · ${currentStreamMetadata.nowPlaying}`;
+            }
+            return `${node?.title || 'Live stream'} · LIVE`;
+        }
+
+        function renderStreamMetadataLine() {
+            const line = linksArea?.querySelector('.stream-now-playing');
+            if (line && isLiveStreamNode(currentNode)) {
+                line.textContent = streamMetadataLineText(currentNode);
+            }
+        }
+
+        function stopStreamMetadataPolling() {
+            if (streamMetadataTimerId) {
+                window.clearInterval(streamMetadataTimerId);
+                streamMetadataTimerId = null;
+            }
+            if (streamMetadataAbortController) {
+                streamMetadataAbortController.abort();
+                streamMetadataAbortController = null;
+            }
+            currentStreamMetadata = null;
+        }
+
+        async function refreshStreamMetadata(node, versionAtStart = navVersion) {
+            const metadataUrl = String(node?.audio?.metadataUrl || '').trim();
+            if (!isLiveStreamNode(node) || !metadataUrl) return;
+
+            if (streamMetadataAbortController) streamMetadataAbortController.abort();
+            const controller = new AbortController();
+            streamMetadataAbortController = controller;
+
+            try {
+                const response = await fetch(metadataUrl, {
+                    cache: 'no-store',
+                    headers: { Accept: 'application/json' },
+                    signal: controller.signal
+                });
+                if (!response.ok) throw new Error(`Metadata request returned ${response.status}`);
+                const normalized = normalizeStreamMetadata(await response.json(), node);
+                if (versionAtStart !== navVersion || currentNode?.id !== node.id) return;
+                currentStreamMetadata = normalized;
+                renderStreamMetadataLine();
+            } catch (error) {
+                if (error?.name !== 'AbortError') {
+                    console.log('Live stream metadata unavailable:', error.message);
+                    if (versionAtStart === navVersion && currentNode?.id === node.id) {
+                        renderStreamMetadataLine();
+                    }
+                }
+            } finally {
+                if (streamMetadataAbortController === controller) streamMetadataAbortController = null;
+            }
+        }
+
+        function startStreamMetadataPolling(node, versionAtStart = navVersion) {
+            stopStreamMetadataPolling();
+            if (!isLiveStreamNode(node)) return;
+            renderStreamMetadataLine();
+            const metadataUrl = String(node.audio.metadataUrl || '').trim();
+            if (!metadataUrl) return;
+            refreshStreamMetadata(node, versionAtStart);
+            streamMetadataTimerId = window.setInterval(
+                () => refreshStreamMetadata(node, versionAtStart),
+                STREAM_METADATA_POLL_MS
+            );
+        }
+
         function isAudioRepeat(node) {
-            return node?.audio?.repeat === true;
+            return !isLiveStreamNode(node) && node?.audio?.repeat === true;
         }
 
         function playPlaylistTrack(versionAtSchedule = navVersion, resumeTime = 0) {
@@ -5162,9 +5299,20 @@
                 progressBar.style.width = '0%';
                 if (driftActive) {
                     progressText.textContent = 'Drifting';
+                } else if (isLiveStreamNode(currentNode)) {
+                    progressText.textContent = 'Press ✓ to tune in';
                 } else if (primaryAudio.duration > 0) {
                     progressText.textContent = `Press ✓ to play audio · ${formatTime(primaryAudio.duration)}`;
                 }
+                return;
+            }
+
+            if (isLiveStreamNode(currentNode)) {
+                if (isAddressMode || inputValue.length > 0) return;
+                progressBar.style.width = '0%';
+                progressText.textContent = driftActive
+                    ? 'Drifting'
+                    : (primaryAudio.paused ? 'Live radio paused' : 'LIVE');
                 return;
             }
             
@@ -5815,6 +5963,7 @@
             }
 
             Timers.clearAll();
+            stopStreamMetadataPolling();
 
             activeInterruptibles = [];
             stopProgressUpdates();
@@ -5946,6 +6095,8 @@
                 updatePauseIcon();
                 return;
             }
+
+            startStreamMetadataPolling(node, versionAtEnter);
             
             // PRIMARY AUDIO: single / bundle / playlist
             if (node.audio) {
@@ -6332,6 +6483,15 @@
                     openTextOverlay(currentNode.text);
                 });
                 linksArea.appendChild(textDocBtn);
+            }
+
+            if (isLiveStreamNode(currentNode)) {
+                const streamStatus = document.createElement('div');
+                streamStatus.className = 'stream-now-playing';
+                streamStatus.setAttribute('role', 'status');
+                streamStatus.setAttribute('aria-live', 'polite');
+                streamStatus.textContent = streamMetadataLineText(currentNode);
+                linksArea.appendChild(streamStatus);
             }
             
             // Node-specific external links
@@ -6849,11 +7009,19 @@
 
             if (audioManualState === 'ready') {
                 progressBar.style.width = '0%';
-                if (primaryAudio.duration > 0) {
+                if (isLiveStreamNode(currentNode)) {
+                    progressText.textContent = 'Press ✓ to tune in';
+                } else if (primaryAudio.duration > 0) {
                     progressText.textContent = `Press ✓ to play audio · ${formatTime(primaryAudio.duration)}`;
                 } else {
                     progressText.textContent = '';
                 }
+                return;
+            }
+
+            if (isLiveStreamNode(currentNode)) {
+                progressBar.style.width = '0%';
+                progressText.textContent = primaryAudio.paused ? 'Live radio paused' : 'LIVE';
                 return;
             }
 
@@ -7044,6 +7212,17 @@
             }
         }
 
+        function restartLiveStream() {
+            if (!isLiveStreamNode(currentNode)) return;
+            primaryAudio.pause();
+            primaryAudio.src = resolveMediaUrl(currentNode.audio.primary);
+            setElementVolume(primaryAudio, 1);
+            primaryAudio.loop = false;
+            primaryAudio.load();
+            primaryAudio.play().catch(e => console.log('Live stream restart failed:', e));
+            startProgressUpdates();
+        }
+
         function executeChoice(key) {
             if (!currentNode) return false;
             
@@ -7212,7 +7391,10 @@
                     updateAddressModeOverlay();
                 }
             } else if (key === 'prev') {
-                if (currentPlaylist) {
+                if (isLiveStreamNode(currentNode)) {
+                    // Reconnect at the live edge instead of seeking an infinite stream.
+                    restartLiveStream();
+                } else if (currentPlaylist) {
                     // Playlist mode: if >3s in, restart current track; otherwise go to previous track
                     if (primaryAudio.currentTime > 3) {
                         // More than 3s into track: restart current track
@@ -7333,7 +7515,10 @@
                 }
                 updatePauseIcon();
             } else if (key === 'next') {
-                if (currentPlaylist) {
+                if (isLiveStreamNode(currentNode)) {
+                    // There is no meaningful seek-ahead operation for live radio.
+                    return;
+                } else if (currentPlaylist) {
                     // Playlist mode: advance to next track
                     advancePlaylist();
                 } else {
