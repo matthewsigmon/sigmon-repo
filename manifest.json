@@ -2466,8 +2466,8 @@
         },
         {
           "key": "2",
-          "label": "About the Navigator Index",
-          "target": "000.0"
+          "label": "About the Index and Drift mode",
+          "target": "0.1.2"
         }
       ],
       "transition": {
@@ -2510,7 +2510,13 @@
           "start": 90000,
           "duration": 20000
         }
-      ]
+      ],
+      "weathering": {
+        "audio": {
+          "primary": "assets/audio/nodes/0.1/0.1R.m4a",
+          "primaryTiming": 0
+        }
+      }
     },
     {
       "id": "7.0.1",
@@ -2589,6 +2595,66 @@
         }
       ],
       "textPauseAudio": false
+    },
+    {
+      "id": "0.1.2",
+      "title": "About the Index and Drift mode",
+      "type": "destination",
+      "choices": [],
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "audio": {
+        "primary": "assets/audio/nodes/0.1.2/0.1.2.m4a",
+        "repeat": true,
+        "aux1": "https://media.matthewsigmon.com/assets/audio/aux/0428-aux.m4a",
+        "aux1Crossfade": 7000
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/0.1.2/0.1.2A.jpg",
+          "start": 0,
+          "duration": 0
+        },
+        {
+          "type": "image",
+          "src": "assets/images/nodes/0.1.2/0.1.2B.jpg",
+          "start": 22000,
+          "duration": 0
+        },
+        {
+          "type": "image",
+          "src": "assets/images/nodes/0.1.2/0.1.2C.jpg",
+          "start": 76000,
+          "duration": 0
+        },
+        {
+          "type": "image",
+          "src": "assets/images/nodes/0.1.2/0.1.2D.jpg",
+          "start": 91000,
+          "duration": 0
+        },
+        {
+          "type": "image",
+          "src": "assets/images/nodes/0.1.2/0.1.2A.jpg",
+          "start": 122000,
+          "duration": 0
+        }
+      ]
     }
   ]
 }
