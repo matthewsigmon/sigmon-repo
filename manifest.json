@@ -552,7 +552,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.2",
@@ -806,7 +807,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.4",
@@ -1060,7 +1062,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.6",
@@ -1187,7 +1190,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.7",
@@ -1314,7 +1318,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.8",
@@ -1568,7 +1573,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.10",
@@ -1822,7 +1828,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.12",
@@ -1949,7 +1956,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.13",
@@ -2203,7 +2211,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.15",
@@ -2330,7 +2339,8 @@
           "url": "https://matthewsigmon.bandcamp.com/album/it-rained-all-day"
         }
       ],
-      "tags": []
+      "tags": [],
+      "drift": false
     },
     {
       "id": "100.1.1.16",
@@ -2745,6 +2755,44 @@
       ],
       "text": "#Streaming radio that sounds like radio.\n\nI made my planet Earth debut at the ass end of 1963, making me a closing bell Boomer, and a 3rd quarter member of Generation Jones. In other words, I'm officially physiologically mature. \n\nWhen I run into people who were born in the 1990s and beyond, I feel compelled to let them know they missed a ton of great stuff by showing up late. They missed a world where time and space were experienced viscerally, consciously, directly. It could be amazingly quiet in the 1970s, until you turned the radio on, which I did just about every chance I got. \n\nI grew up in west central Illinois, at the time, a region of serious media austerity. 2 TV channels (NBC and CBS, which meant we couldn't watch \"Happy Days\"), and only a few more radio stations than that. Chicago's 890 WLS and 55 KSD in St. Louis were the big AM blowtorches, and that's where I discovered music on the radio.\n\nThere was an FM station, KGRC in Hannibal/Quincy, and my oldest sister had a nice little Sony portable radio that was usually tuned to it.  But I liked WLS, I liked AM radio and how music sounded on it.  I still do. \n\nUnlike the streaming platforms today, AM radio had its own personality and moods—they changed with the weather. On a rainy day, the signal might be so buried in static that you'd only get parts and pieces of what the DJ was spinning. But when you did, it landed like a cool glass of water on a hot summer day, it quenched something, connected you to a world of sound, expression, melody, and meaning.\n\nAM radio made music available, and also scarce. Tuning in a station when reception was dicey felt like a negotiation, equal parts skill and luck. If conditions were just right, you became an eavesdropper, tugging a tenuous thread of culture, art, and excitement out of the ethers. You felt lucky, and you were. \n\nThe essence of those experiences are powerfully linked to the unique sonic qualities of the medium, and that's why I created Supernormal Radio. \n\nThis stream rotates over 2000 tracks from the 50s through the 90s (and a few from later), each one treated and re-recorded to faithfully capture the sound of a vintage AM broadcast. You can listen to this on your phone and you'll have a pretty good idea what it was like to carry around a transistor radio the size of a deck of cards. \n\nThere's more to music than high fidelity and recording quality. Check out the stream and who knows, maybe you'll see what I mean.   \n\n\n",
       "textTitle": "Why I created Supernormal Radio"
+    },
+    {
+      "id": "7.0.3",
+      "title": "Overhead",
+      "type": "destination",
+      "choices": [],
+      "driftHold": "full",
+      "textTitle": "More Info",
+      "text": "# What you're hearing:\nI composed and recorded this instrumental for a short video I made covering an outdoor benefits event for Mohawk Industries here in Georgia. \nThe track features a few different guitars, namely my:\n- **L'Arrivée L-09** (full-sized 6-string)\n- **Tacoma Papoose** (short scale acoustic, A tuning)\n- **$100 Lap Dulcimer** made out of some sort of cabinet plywood shit that just makes me love it even more. \n\nThe electric slide was played on my **Burns London Steer**, one of the weirdest, coolest guitars ever. ",
+      "textPauseAudio": false,
+      "audio": {
+        "primary": "assets/audio/nodes/7.03/Overhead.m4a",
+        "repeat": true
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/7.0.3/7.0.3.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      }
     }
   ]
 }
