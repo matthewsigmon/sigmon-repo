@@ -2766,7 +2766,7 @@
       "text": "# What you're hearing:\nI composed and recorded this instrumental for a short video I made covering an outdoor benefits event for Mohawk Industries here in Georgia. \nThe track features a few different guitars, namely my:\n- **L'Arrivée L-09** (full-sized 6-string)\n- **Tacoma Papoose** (short scale acoustic, A tuning)\n- **$100 Lap Dulcimer** made out of some sort of cabinet plywood shit that just makes me love it even more. \n\nThe electric slide was played on my **Burns London Steer**, one of the weirdest, coolest guitars ever. ",
       "textPauseAudio": false,
       "audio": {
-        "primary": "assets/audio/nodes/7.03/Overhead.m4a",
+        "primary": "assets/audio/nodes/7.0.3/Overhead.m4a",
         "repeat": true
       },
       "visuals": [
