@@ -2798,6 +2798,42 @@
         ],
         "mode": "random_tracked"
       }
+    },
+    {
+      "id": "70.1.18.2",
+      "title": "Ginlightenment",
+      "type": "destination",
+      "choices": [],
+      "driftHold": "full",
+      "textPauseAudio": false,
+      "audio": {
+        "primary": "assets/audio/nodes/70.1/70.1.18/Ginlightenment.mp3",
+        "repeat": true
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/70.1/70.1.18/70.1.18.2.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      }
     }
   ]
 }
