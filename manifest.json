@@ -2524,6 +2524,36 @@
       }
     },
     {
+      "id": "7.0.2",
+      "title": "In Stride - Demo",
+      "type": "destination",
+      "choices": [],
+      "driftHold": "full",
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "textPauseAudio": false,
+      "textTitle": "Lyrics - In Stride",
+      "text": "# In Stride\n\nHalfway there I found myself\nBefore I began\nSearching for a message \nThat I held in my hand\nI recognized the words\nBut I could not understand\n'Til I read it in a different light\n\nOnce I had arrived \nI couldn't find my way there\nLost contact with the ground\nMy legs were swinging in the air\nIt felt a little strange\nWhen blind men started to stare\nBut they saw it in a different light\n\n### Chorus:\nEvery day and night\nI'm taking it all in stride\nI'm taking it all in stride\nAnd I'm busting apart at the seams baby\nNothing's at all what it seems, maybe\nReality feels like a dream\nWhen I open my eyes\nBut I'm taking it all in stride\n\n### Chorus\n\nNow I'm going nowhere\n'Cause I've been there before\nFound a ladder to the matter\nLaying on the floor\nMy mind was just an anchor \n'Til it started to soar\nNow I'm thinking in a different light\n\nEvery day and night...\n\n### Chorus\n\n©Matthew Sigmon",
+      "audio": {
+        "repeat": true,
+        "primary": "assets/audio/7.0.2/In-Stride.m4a"
+      }
+    },
+    {
       "id": "7.0.1",
       "title": "Feel It - Song sketch",
       "type": "destination",
