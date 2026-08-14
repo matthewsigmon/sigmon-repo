@@ -2836,6 +2836,44 @@
       },
       "textTitle": "Ginlightenment Script and Lyrics",
       "text": "# Ginlightenment\n\n### From **Episode 18 - The First and Only Beer Show**\nOriginally released September 23, 2006\n\n---\n**Scene 1**\n\nEarly in the morning, \nI find myself briskly reanimated \nTo the sound of birds chirping, \nDraperies dancing unknown ballets in the breeze \nAs lemon and lime sunlight splashes through my window. \nBirch tree branches casting fractal shadows on my bed. \nI dreamed last night I rode a raft of Boolean equations \nOn a sea of unprovable theorems \nLike Cantor's old diagonalization one, \nWhen suddenly the 1905 Yale Championship Sculling Team \nAppears in my boat and presents me with a plaque. \n\n**Chorus**\nOh oh\nThe Ginlightenment is on us now \nIt's high time we move past the lower brow \n(Unless it's done for purposes of irony)\n\n**Scene 2**\n\nI tiptoe my way down the hall, \nImpersonating some sort of creature \nPossessing grace far beyond anything \nI've ever had a right to example. \nAnd no chance that I'll stumble trip, or fall, \nFor sweet martini nanny tucked me deep into my bed last night, And look at me, \nClear as a bell-\nBright-eyed, bushy tailed. \nNo morning brew is contraband, \nI breakfast with long-stemmed glass in hand, \nCradling a liquid work of art that does not fuck around. \nI just made that up. \n\nDarling, please pass the olives. \n\n**Chorus**\nOh oh\nThe Ginlightenment is on us now \nIt's high time we move past the lower brow \n(Unless it's done for purposes of irony)\nOh oh\nThe Ginlightenment is crystal clear \nActivate your brain and you can join us here\nFinite liquid flowing from infinity\n\n**Chorus Ad Infinitum**\n"
+    },
+    {
+      "id": "70.1.15.1",
+      "title": "Back On Maritime",
+      "type": "destination",
+      "choices": [],
+      "driftHold": "full",
+      "textPauseAudio": false,
+      "audio": {
+        "primary": "assets/audio/nodes/70.1/70.1.15/Back-On-Maritime.mp3",
+        "repeat": true
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/70.1/70.1.15/70.1.15.1.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ],
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "textTitle": "Ginlightenment Script and Lyrics",
+      "text": "# Back On Maritime\n\n### From **Episode 15 - Sailor Jerry Spiced Navy Rum**\nOriginally released March 11, 2006\n\n---\nSailor Jerry \nIs not contrary \nTo making merry all the time \nKeep your green fairy \nCause I've got Sailor Jerry \nI'm off the clock \nAnd back on maritime \n\n\nTip the bottle \nPull back the throttle \nSun fades down a hazy blue \nI've done enough thinking \nI'm better off drinking \nAs long as I'll be\nDrinking here with you \n\n\n**Instrumental**\n\nSailor Jerry \nIs not contrary \nTo making merry all the time \nKeep your green fairy \nCause I've got Sailor Jerry \nI'm off the clock \nAnd back on maritime \n---\n\nMatthew Sigmon: Guitars, dulcimer, vocals\nJulie Anderson: Backing vocals"
     }
   ]
 }
