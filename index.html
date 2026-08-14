@@ -2888,6 +2888,9 @@
 
     <div id="debugHud" style="position:fixed;left:10px;bottom:10px;z-index:2000;background:rgba(0,0,0,0.75);padding:10px;border-radius:8px;font:12px/1.3 monospace;color:#eee;display:none;max-width:60vw;white-space:pre;"></div>
 
+    <script src="/assets/vendor/markdown-it.umd.min.js"></script>
+    <script src="/assets/vendor/purify.min.js"></script>
+    <script src="/assets/terrain-markdown.js"></script>
     <script>
         // ===========================================
         // PERFORMANCE MONITORING
@@ -6822,68 +6825,7 @@
         })();
         
         function parseMarkdown(md) {
-            if (!md) return '';
-            
-            let html = md
-                // Escape HTML characters
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                
-                // Code blocks (must be before inline code)
-                .replace(/```([\w]*)([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>')
-                
-                // Inline code
-                .replace(/`([^`]+)`/g, '<code>$1</code>')
-                
-                // Headers
-                .replace(/^###### (.*$)/gim, '<h6>$1</h6>')
-                .replace(/^##### (.*$)/gim, '<h5>$1</h5>')
-                .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
-                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-                
-                // Blockquote
-                .replace(/^\> (.*$)/gim, '<blockquote><p>$1</p></blockquote>')
-                
-                // Horizontal rule
-                .replace(/^\-{3,}|\*{3,}|\_{3,}$/gim, '<hr>')
-                
-                // Bold and italic
-                .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                .replace(/___(.*?)___/g, '<strong><em>$1</em></strong>')
-                .replace(/__(.*?)__/g, '<strong>$1</strong>')
-                .replace(/_(.*?)_/g, '<em>$1</em>')
-                
-                // Links
-                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
-                
-                // Unordered list
-                .replace(/^\- (.*$)/gim, '<li>$1</li>')
-                .replace(/^\* (.*$)/gim, '<li>$1</li>')
-                
-                // Ordered list
-                .replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
-            
-            // Wrap consecutive list items in ul/ol
-            html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
-            
-            // Fix double-wrapped list items
-            html = html.replace(/<ul>(.*)<li>(.*)<\/li>(.*)<\/ul>/gs, '<ul><li>$2</li></ul>');
-            
-            // Paragraphs (must be last)
-            const blocks = html.split('\n\n');
-            html = blocks.map(block => {
-                block = block.trim();
-                if (!block) return '';
-                if (block.match(/^<(?:h|p|ul|ol|li|blockquote|pre|hr)/)) return block;
-                return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
-            }).join('\n\n');
-            
-            return html;
+            return window.TerrainMarkdown.render(md);
         }
 
 
