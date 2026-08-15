@@ -2912,6 +2912,42 @@
       },
       "textTitle": "Bass Fishing Report Transcript",
       "text": "# Bass Fishing Report (Live)\n\n### Featuring **Sting** and **Peter Gabriel**\n### From **Episode 24 - Tanqueray Rangpur Gin & Tonic**\nOriginally released September 2, 2007\n\n---\nSting:\nHey! \n\nWho's hungry for bass? That's right. \nIt's time for another report. \nAnd this one is for Boyd Lake, Colorado. Submitted by Jayhawk88. Date fished 721.07. Water temperature 79. Yeah! \n\n**Chorus**\nWhat a mistake\nFishin' this lake \nI won't go back to this mudhole\nWhat a mistake\nFishin' this lake \nI won't go back to this mudhole  \n\n**Verse 1**\n\nTook the family camping at Boyd Lake State Park \nBesides fishing like a giant \"bowl\" (whatever that means) \nThe entire shoreline was silted muck \nSilted muck and stick-up weeds! \n\n**Chorus**\n\n**Sting**\nHey! Now to help me out on the back half of the report, another fellow fish lover, put your hands together for my good friend, Mr. Peter Gabriel! \n\n\n**Peter Gabriel**\n\nI did my best to find isolated rock piles\nAnd when I did, I dragged a french fry around them\nFor three hours! \n\n**Sting & Peter together**\n\nWithout a single bite\nWithout a single bite \nWithout a single bite \nWithout a single bite \n\nI don't mean to harp \nBut there's no shortage of carp \nhey were jumping everywhere, Goddammit! \n\n**Chorus**\n\n**Sting**\nFuck this nasty piece of shit! \n\n**Peter** \nGoing to Walsenburg next weekend \nTo try and stir up some small mouth \n\nThank you! "
+    },
+    {
+      "id": "7.0.4",
+      "title": "Going Away",
+      "type": "destination",
+      "choices": [],
+      "driftHold": "full",
+      "textTitle": "Going Away Lyrics",
+      "textPauseAudio": false,
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "audio": {
+        "primary": "assets/audio/nodes/7.0.4/Going-Away.m4a",
+        "repeat": true
+      },
+      "images": [
+        {
+          "src": "assets/images/nodes/7.0.4/7.0.4.jpg",
+          "caption": ""
+        }
+      ],
+      "text": "# Going Away\n\nI wake in the morning\nAsking a question\nHow will it end? \nHow will it end?\n\nI climb down at night\nInto my introspection \nHow to be born again? \nHow to be born \n\n**Chorus**\n\nYou circle my head \nLike a crown of conviction \nThe trial lasted a day \nI take you to bed \nLost in love's inquisition \nIt's coming to going away \nIt's coming to going away \nIt's coming to going away \n\nHow will it end? \nHow will it end? \n\nHow to be born again? \nHow to be born? \n\n**Chorus**\n\nI sleep in the sunlight \nShadowed by questions \nHow will it end? \nHow will it end? \n\nSpeeding in moonlight \nThrough all intersections \nHow to be born again? \nHow to be born? \n\n**Chorus**"
     }
   ]
 }
