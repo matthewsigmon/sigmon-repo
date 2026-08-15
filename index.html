@@ -4213,6 +4213,11 @@
             return !isLiveStreamNode(node) && node?.audio?.repeat === true;
         }
 
+        /** Authored repeat applies during intentional listening, never during Drift. */
+        function shouldRepeatAudio(node) {
+            return isAudioRepeat(node) && !driftActive;
+        }
+
         function playPlaylistTrack(versionAtSchedule = navVersion, resumeTime = 0) {
             if (!currentPlaylist) return;
             const { files, currentTrack } = currentPlaylist;
@@ -4275,7 +4280,7 @@
                 console.log('Playlist complete');
                 const nodeId = currentPlaylist.nodeId;
 
-                if (isAudioRepeat(currentNode)) {
+                if (shouldRepeatAudio(currentNode)) {
                     console.log('Playlist: repeating from start');
                     currentPlaylist.currentTrack = 0;
                     savePlaylistState(nodeId, { currentTrack: 0, currentTime: 0 });
@@ -4286,7 +4291,7 @@
                 currentPlaylist = null;
                 savePlaylistState(nodeId, { currentTrack: 0, currentTime: 0 });
 
-                if (currentNode && currentNode.autoNext) {
+                if (!driftActive && currentNode && currentNode.autoNext) {
                     const sourceNode = currentNode;
                     playTransitionThen(
                         withNavGuard(() => {
@@ -4317,13 +4322,17 @@
             
             try {
                 const data = localStorage.getItem(key);
-                const state = data ? JSON.parse(data) : { bundles: {}, playlists: {}, imageBundles: {} };
-                // Ensure imageBundles exists (for backward compatibility)
+                const state = data ? JSON.parse(data) : { bundles: {}, playlists: {}, imageBundles: {}, drift: { playedNodeIds: [] } };
+                // Fill newer state branches when loading an older installation.
+                if (!state.bundles) state.bundles = {};
+                if (!state.playlists) state.playlists = {};
                 if (!state.imageBundles) state.imageBundles = {};
+                if (!state.drift) state.drift = { playedNodeIds: [] };
+                if (!Array.isArray(state.drift.playedNodeIds)) state.drift.playedNodeIds = [];
                 return state;
             } catch (e) {
                 console.error('Failed to load state:', e);
-                return { bundles: {}, playlists: {}, imageBundles: {} };
+                return { bundles: {}, playlists: {}, imageBundles: {}, drift: { playedNodeIds: [] } };
             }
         }
 
@@ -4369,6 +4378,16 @@
         function savePlaylistState(nodeId, playlistState) {
             const state = loadTerrainState();
             state.playlists[nodeId] = playlistState;
+            saveTerrainState(state);
+        }
+
+        function getDriftState() {
+            return loadTerrainState().drift;
+        }
+
+        function saveDriftState(driftState) {
+            const state = loadTerrainState();
+            state.drift = driftState;
             saveTerrainState(state);
         }
 
@@ -4572,13 +4591,19 @@
                 
                 // If all played, reset
                 if (availableIndices.length === 0) {
+                    const previousIndex = bundleState.lastIndex;
                     bundleState.playedIndices = [];
                     availableIndices = Array.from({ length: files.length }, (_, i) => i);
+                    // A new cycle must not begin with the item that ended the old one.
+                    if (files.length > 1 && Number.isInteger(previousIndex)) {
+                        availableIndices = availableIndices.filter(i => i !== previousIndex);
+                    }
                 }
                 
                 // Pick random from available
                 selectedIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
                 bundleState.playedIndices.push(selectedIndex);
+                bundleState.lastIndex = selectedIndex;
                 
             } else {
                 // Default to first file
@@ -4619,13 +4644,18 @@
                 
                 // If all shown, reset
                 if (availableIndices.length === 0) {
+                    const previousIndex = bundleState.lastIndex;
                     bundleState.playedIndices = [];
                     availableIndices = Array.from({ length: files.length }, (_, i) => i);
+                    if (files.length > 1 && Number.isInteger(previousIndex)) {
+                        availableIndices = availableIndices.filter(i => i !== previousIndex);
+                    }
                 }
                 
                 // Pick random from available
                 selectedIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
                 bundleState.playedIndices.push(selectedIndex);
+                bundleState.lastIndex = selectedIndex;
                 
             } else {
                 // Default to first file
@@ -6183,7 +6213,7 @@
                     PerfMonitor.start('audio-load-' + node.id);
                     primaryAudio.src = resolveMediaUrl(audioFile);
                     setElementVolume(primaryAudio, 1);
-                    primaryAudio.loop = isAudioRepeat(node);
+                    primaryAudio.loop = shouldRepeatAudio(node);
                     
                     // Track audio load time
                     const audioLoadHandler = () => {
@@ -6275,7 +6305,7 @@
             }
 
             // DESTINATION autoNext behavior (transition semantics); repeat takes precedence
-            if (node.type === 'destination' && node.autoNext && node.audio?.primary && !isAudioRepeat(node)) {
+            if (!driftActive && node.type === 'destination' && node.autoNext && node.audio?.primary && !isAudioRepeat(node)) {
                 const transitionTiming = node.transition?.timing || 0;
 
                 const goNext = withNavGuard(() => {
@@ -6460,8 +6490,9 @@
             
             if (transition && transition.type === 'bundle' && transition.files && transition.files.length > 0) {
                 // BUNDLE TRANSITION: Select file based on mode
-                const nodeId = transitionNode?.id || 'transition';
-                transitionAudioFile = selectBundleFile(transition.files, transition.mode, `${nodeId}_transition`);
+                // Identical transition bundles share one persistent shuffle pool across nodes.
+                const transitionPoolKey = `transition_pool:${transition.files.map(String).join('\u001f')}`;
+                transitionAudioFile = selectBundleFile(transition.files, transition.mode, transitionPoolKey);
             } else if (transition && transition.audio) {
                 // SINGLE TRANSITION: Use the audio property
                 transitionAudioFile = transition.audio;
@@ -7850,24 +7881,23 @@
         }
 
         // ===========================================
-        // DRIFT MODE - passive weighted wander
+        // DRIFT MODE - persistent random-tracked wander
         // ===========================================
         // Explicit entry (sidebar button or ?drift=1). While drifting:
         // - nodes with primary audio advance when the audio ends (never cut mid-play)
-        // - visual-only / looping / aux-only nodes advance on a dwell timer
+        // - authored repeat and autoNext are suspended; repeat audio plays once
+        // - visual-only / aux-only nodes advance on a dwell timer
         // - a short "breath" gap separates arrival from departure
         // - first tap anywhere = linger (halt drift, stay on node); skip key = next node
-        // - authored autoNext always wins over the drift picker
+        // - every eligible node is visited once per persistent randomized cycle
         // Streams (Infinity duration) hold forever unless the node sets driftDwellMs.
         let driftActive = false;
         let driftPendingStart = false;
-        let driftRecentNodes = [];
         let driftDwellTimerId = null;
         let driftBreathTimerId = null;
         let driftVideoStartTimerId = null;
         let driftQuietTimerId = null;
 
-        const DRIFT_RECENT_MAX = 3;
         const DRIFT_QUIET_DELAY_MS = 10000;
 
         const driftBtn = document.getElementById('driftBtn');
@@ -7882,16 +7912,9 @@
             return Number.isFinite(v) && v >= 0 ? v : 1500;
         }
 
-        /** driftHold: "full" — natural length of this node's dwell-class media, or null
+        /** driftHold: "full" — natural length of this node's carousel, or null
             if it has none (static visual → caller falls back to the global default). */
         function driftFullHoldMs(node) {
-            // Looping/repeating primary audio: one full pass
-            if (isAudioRepeat(node) && primaryAudio.src) {
-                if (Number.isFinite(primaryAudio.duration) && primaryAudio.duration > 0) {
-                    return Math.round(primaryAudio.duration * 1000);
-                }
-                return null; // metadata not loaded yet — caller re-arms on loadedmetadata
-            }
             // Auto-advancing carousel: one full rotation (every image shown once)
             const imgCount = Array.isArray(node.images) ? node.images.length : 0;
             if (imgCount > 1 && Number(node.imageAutoAdvance) > 0) {
@@ -7975,7 +7998,8 @@
             if (driftActive || !isDriftAvailable()) return;
             if (!manifest || !appStarted) return;
             driftActive = true;
-            driftRecentNodes = [];
+            // A repeat node may already be looping when Drift is engaged.
+            if (isAudioRepeat(currentNode) && !currentPlaylist) primaryAudio.loop = false;
             document.body.classList.add('drift-active');
             driftBtn?.classList.add('drift-on');
             scheduleDriftQuiet();
@@ -7992,11 +8016,21 @@
         function stopDrift() {
             driftPendingStart = false;
             if (!driftActive) return;
+            const restoreRepeat = isAudioRepeat(currentNode);
             driftActive = false;
             clearDriftTimers();
             if (driftQuietTimerId) { window.clearTimeout(driftQuietTimerId); driftQuietTimerId = null; }
             document.body.classList.remove('drift-active', 'drift-quiet');
             driftBtn?.classList.remove('drift-on');
+            // Lingering on a repeat node restores its authored behavior immediately.
+            if (restoreRepeat && primaryAudio.src && !currentPlaylist) {
+                primaryAudio.loop = true;
+                if (primaryAudio.ended) {
+                    primaryAudio.currentTime = 0;
+                    primaryAudio.play().catch(e => console.log('Repeat resume failed:', e));
+                    startProgressUpdates();
+                }
+            }
             refreshIdleProgressDisplay();
             console.log('Drift: released');
         }
@@ -8030,50 +8064,46 @@
             const node = currentNode;
             if (!node) return null;
 
-            // Prefer adjacency: outbound choices + interruptible targets
-            let candidates = [
-                ...(node.choices || []).map(c => c && c.target),
-                ...(node.interruptible || []).map(c => c && c.target)
-            ].filter(Boolean).filter(id => id !== node.id);
+            const eligibleIds = (manifest?.nodes || []).filter(driftEligible).map(n => n.id);
+            if (!eligibleIds.length) return null;
 
-            candidates = [...new Set(candidates)].filter(id =>
-                driftEligible(manifest?.nodes?.find(x => x.id === id)));
+            const eligibleSet = new Set(eligibleIds);
+            const driftState = getDriftState();
+            // Prune nodes removed from the manifest or no longer eligible.
+            driftState.playedNodeIds = [...new Set(driftState.playedNodeIds)]
+                .filter(id => eligibleSet.has(id));
 
-            // No local paths: the wind jumps anywhere in the terrain
-            if (!candidates.length) {
-                candidates = (manifest?.nodes || [])
-                    .filter(n => n.id !== node.id && driftEligible(n))
-                    .map(n => n.id);
+            let available = eligibleIds.filter(id =>
+                id !== node.id && !driftState.playedNodeIds.includes(id));
+
+            if (!available.length) {
+                // Start a fresh cycle, counting the current node as already heard so the
+                // boundary can never repeat it immediately.
+                driftState.playedNodeIds = eligibleSet.has(node.id) ? [node.id] : [];
+                available = eligibleIds.filter(id => id !== node.id);
             }
 
-            if (!candidates.length) return null;
-            const fresh = candidates.filter(id => !driftRecentNodes.includes(id));
-            const pool = fresh.length ? fresh : candidates;
-            return pool[Math.floor(Math.random() * pool.length)];
+            if (!available.length) {
+                saveDriftState(driftState);
+                return null;
+            }
+
+            const target = available[Math.floor(Math.random() * available.length)];
+            driftState.playedNodeIds.push(target);
+            saveDriftState(driftState);
+            return target;
         }
 
         function driftAdvance() {
             if (!driftActive || !currentNode || !manifest) return;
             clearDriftTimers();
 
-            // Authored flow wins when present
-            let target = currentNode.autoNext || driftPickTarget();
+            const target = driftPickTarget();
 
             if (!target) {
-                // Dead end: the wind circles back home to re-seed the walk
-                const home = manifest?.terrain?.startNode;
-                if (home && home !== currentNode.id) {
-                    target = home;
-                } else {
-                    console.log('Drift: nowhere to go, releasing');
-                    stopDrift();
-                    return;
-                }
-            }
-
-            driftRecentNodes.push(currentNode.id);
-            if (driftRecentNodes.length > DRIFT_RECENT_MAX) {
-                driftRecentNodes = driftRecentNodes.slice(-DRIFT_RECENT_MAX);
+                console.log('Drift: nowhere to go, releasing');
+                stopDrift();
+                return;
             }
 
             console.log('Drift: wandering to', target);
@@ -8128,11 +8158,12 @@
             const hasPrimaryAudio = !!(node.audio?.primary ||
                 (node.audio?.type === 'bundle' && node.audio?.files?.length) ||
                 (node.audio?.type === 'playlist' && node.audio?.source));
-            const looping = isAudioRepeat(node);
+            const looping = shouldRepeatAudio(node);
+            const authoredRepeat = isAudioRepeat(node);
             const dwellOverride = Number(node.driftDwellMs);
             const hasDwellOverride = Number.isFinite(dwellOverride) && dwellOverride > 0;
 
-            if (hasPrimaryAudio && !looping && !hasDwellOverride) {
+            if (hasPrimaryAudio && !looping && (!hasDwellOverride || authoredRepeat)) {
                 // Ended listener drives advancement. If drift was engaged on a node whose
                 // audio already finished, or playback is stalled-paused, nudge it along.
                 if (primaryAudio.ended) {
@@ -8144,9 +8175,9 @@
                 return;
             }
 
-            // Visual-only, looping, aux-only, or author-overridden (e.g. live streams): dwell.
-            // driftHold: "full" holds for the media's natural length (one audio loop, one
-            // carousel rotation); an explicit driftDwellMs wins if both are present.
+            // Visual-only, aux-only, or author-overridden (e.g. live streams): dwell.
+            // driftHold: "full" holds for one carousel rotation; an explicit
+            // driftDwellMs wins if both are present.
             const holdFull = !hasDwellOverride && node.driftHold === 'full';
             let dwell = hasDwellOverride ? dwellOverride : driftDwellMs();
 
@@ -8154,15 +8185,6 @@
                 const fullMs = driftFullHoldMs(node);
                 if (fullMs) {
                     dwell = fullMs;
-                } else if (isAudioRepeat(node) && primaryAudio.src) {
-                    // Loop length unknown until metadata arrives — re-arm with the real duration
-                    const v = navVersion;
-                    primaryAudio.addEventListener('loadedmetadata', () => {
-                        if (!driftActive || v !== navVersion) return;
-                        if (Number.isFinite(primaryAudio.duration) && primaryAudio.duration > 0) {
-                            armDriftDwell(Math.round(primaryAudio.duration * 1000));
-                        }
-                    }, { once: true });
                 }
             }
 
@@ -8173,12 +8195,11 @@
         function onDriftPrimaryEnded() {
             if (!driftActive) return;
             const v = navVersion;
-            // Defer past same-event handlers (playlist advance, authored autoNext)
+            // Defer past same-event handlers (notably playlist advance).
             window.setTimeout(() => {
                 if (!driftActive || v !== navVersion || !currentNode) return;
-                if (currentNode.autoNext) return;       // authored flow advances
                 if (currentPlaylist) return;            // playlist continuing to next track
-                if (isAudioRepeat(currentNode) || primaryAudio.loop) return;
+                if (primaryAudio.loop) return;
                 driftAdvanceAfterBreath();
             }, 80);
         }
