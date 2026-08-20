@@ -2948,6 +2948,102 @@
         }
       ],
       "text": "# Going Away\n\nI wake in the morning\nAsking a question\nHow will it end? \nHow will it end?\n\nI climb down at night\nInto my introspection \nHow to be born again? \nHow to be born \n\n**Chorus**\n\nYou circle my head \nLike a crown of conviction \nThe trial lasted a day \nI take you to bed \nLost in love's inquisition \nIt's coming to going away \nIt's coming to going away \nIt's coming to going away \n\nHow will it end? \nHow will it end? \n\nHow to be born again? \nHow to be born? \n\n**Chorus**\n\nI sleep in the sunlight \nShadowed by questions \nHow will it end? \nHow will it end? \n\nSpeeding in moonlight \nThrough all intersections \nHow to be born again? \nHow to be born? \n\n**Chorus**"
+    },
+    {
+      "id": "4.0.1",
+      "title": "What is creativity?",
+      "type": "destination",
+      "choices": [],
+      "driftHold": "full",
+      "textPauseAudio": false,
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "audio": {
+        "aux1": {
+          "type": "bundle",
+          "mode": "random_tracked",
+          "files": [
+            "assets/audio/music/0587.mp3",
+            "assets/audio/music/0591.mp3",
+            "assets/audio/music/0593.m4a",
+            "assets/audio/music/1153.m4a",
+            "assets/audio/music/1154.mp3"
+          ]
+        },
+        "primary": "",
+        "repeat": true,
+        "aux1Crossfade": 10000
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/4.0/4.0.1.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ]
+    },
+    {
+      "id": "4.0.2",
+      "title": "The subjective paradox.",
+      "type": "destination",
+      "choices": [],
+      "driftHold": "full",
+      "textPauseAudio": false,
+      "transition": {
+        "type": "bundle",
+        "timing": 0,
+        "volume": 0,
+        "files": [
+          "assets/audio/transitions/bundle-001/1-F2.mp3",
+          "assets/audio/transitions/bundle-001/2-G2.mp3",
+          "assets/audio/transitions/bundle-001/3-A2.mp3",
+          "assets/audio/transitions/bundle-001/4-B2.mp3",
+          "assets/audio/transitions/bundle-001/5-C3.mp3",
+          "assets/audio/transitions/bundle-001/6-D3.mp3",
+          "assets/audio/transitions/bundle-001/7-E3.mp3",
+          "assets/audio/transitions/bundle-001/8-F3.mp3"
+        ],
+        "mode": "random_tracked"
+      },
+      "audio": {
+        "aux1": {
+          "type": "bundle",
+          "mode": "random_tracked",
+          "files": [
+            "assets/audio/music/0587.mp3",
+            "assets/audio/music/0591.mp3",
+            "assets/audio/music/0593.m4a",
+            "assets/audio/music/1153.m4a",
+            "assets/audio/music/1154.mp3"
+          ]
+        },
+        "primary": "",
+        "repeat": true,
+        "aux1Crossfade": 10000
+      },
+      "visuals": [
+        {
+          "type": "image",
+          "src": "assets/images/nodes/4.0/4.0.2.jpg",
+          "start": 0,
+          "duration": 0
+        }
+      ]
     }
   ]
 }
