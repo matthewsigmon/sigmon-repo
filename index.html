@@ -4616,6 +4616,34 @@
             return files[selectedIndex];
         }
 
+        function hasPrimaryAudioDefinition(node) {
+            const audio = node?.audio;
+            return !!(audio?.primary ||
+                (audio?.type === 'bundle' && audio.files?.length) ||
+                (audio?.type === 'playlist' && audio.source));
+        }
+
+        function hasAux1Definition(node) {
+            const aux1 = node?.audio?.aux1;
+            if (typeof aux1 === 'string') return aux1.trim().length > 0;
+            return !!(aux1?.type === 'bundle' && Array.isArray(aux1.files) && aux1.files.length);
+        }
+
+        /** Choose one aux variation per node entry. Legacy string values remain valid. */
+        function selectAux1File(node) {
+            const aux1 = node?.audio?.aux1;
+            if (typeof aux1 === 'string') return aux1.trim() || null;
+            if (aux1?.type !== 'bundle' || !Array.isArray(aux1.files) || !aux1.files.length) return null;
+
+            const files = aux1.files
+                .map(file => typeof file === 'string' ? file.trim() : '')
+                .filter(Boolean);
+            if (!files.length) return null;
+            // Identical aux bundles share persistent selection history across nodes.
+            const poolKey = `aux1_pool:${files.map(String).join('\u001f')}`;
+            return selectBundleFile(files, aux1.mode || 'random_tracked', poolKey);
+        }
+
         // Select image from bundle (same logic as audio, separate state tracking)
         function selectImageBundleFile(files, mode, nodeId) {
             if (!files || files.length === 0) return null;
@@ -6258,8 +6286,9 @@
                 }
             }
 
-            // AUX1
-            if (node.audio?.aux1) {
+            // AUX1: legacy single path or one selection from a persistent bundle
+            const aux1File = selectAux1File(node);
+            if (aux1File) {
                 // Reset any existing crossfade state
                 if (aux1CrossfadeInterval) {
                     Timers.clearInterval(aux1CrossfadeInterval);
@@ -6268,17 +6297,18 @@
                 aux1CrossfadeAudio.pause();
                 aux1CrossfadeAudio.src = '';
 
-                aux1Audio.src = resolveMediaUrl(node.audio.aux1);
+                const resolvedAux1File = resolveMediaUrl(aux1File);
+                aux1Audio.src = resolvedAux1File;
                 const crossfadeDuration = node.audio.aux1Crossfade || 0;
 
                 if (crossfadeDuration > 0) {
                     aux1Audio.loop = false;
-                    setupAux1Crossfade(resolveMediaUrl(node.audio.aux1), crossfadeDuration);
+                    setupAux1Crossfade(resolvedAux1File, crossfadeDuration);
                 } else {
                     aux1Audio.loop = true;
                 }
 
-                const safariAuxDelay = isSafari && node.audio?.primary ? getPerfOverride('safariAuxDelayMs') : 0;
+                const safariAuxDelay = isSafari && hasPrimaryAudioDefinition(node) ? getPerfOverride('safariAuxDelayMs') : 0;
                 const auxDelay = (node.audio.aux1Timing || 0) + safariAuxDelay;
                 const aux1FadeIn = node.audio.aux1FadeIn !== undefined ? node.audio.aux1FadeIn : AUX_FADE_DURATION;
                 const startAux = withNavGuard(() => fadeInAux(aux1Audio, 1.0, aux1FadeIn), versionAtEnter);
@@ -6293,7 +6323,7 @@
             }
 
             // For aux1-only nodes (no primary audio), show guidance message directly
-            if (!node.audio?.primary && (node.audio?.aux1 || (node.choices && node.choices.length > 0))) {
+            if (!hasPrimaryAudioDefinition(node) && (hasAux1Definition(node) || (node.choices && node.choices.length > 0))) {
                 progressBar.style.width = '0%';
                 progressText.textContent = driftActive ? 'Drifting' : 'Make a choice when ready';
                 
@@ -8155,9 +8185,7 @@
                 updatePauseIcon();
             }
 
-            const hasPrimaryAudio = !!(node.audio?.primary ||
-                (node.audio?.type === 'bundle' && node.audio?.files?.length) ||
-                (node.audio?.type === 'playlist' && node.audio?.source));
+            const hasPrimaryAudio = hasPrimaryAudioDefinition(node);
             const looping = shouldRepeatAudio(node);
             const authoredRepeat = isAudioRepeat(node);
             const dwellOverride = Number(node.driftDwellMs);
