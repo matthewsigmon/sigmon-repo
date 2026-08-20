@@ -2954,7 +2954,6 @@
       "title": "What is creativity?",
       "type": "destination",
       "choices": [],
-      "driftHold": "full",
       "textPauseAudio": false,
       "transition": {
         "type": "bundle",
@@ -2995,14 +2994,14 @@
           "start": 0,
           "duration": 0
         }
-      ]
+      ],
+      "driftDwellMs": 20000
     },
     {
       "id": "4.0.2",
       "title": "The subjective paradox.",
       "type": "destination",
       "choices": [],
-      "driftHold": "full",
       "textPauseAudio": false,
       "transition": {
         "type": "bundle",
@@ -3043,7 +3042,8 @@
           "start": 0,
           "duration": 0
         }
-      ]
+      ],
+      "driftDwellMs": 20000
     }
   ]
 }
