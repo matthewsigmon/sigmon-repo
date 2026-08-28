@@ -2995,7 +2995,7 @@
           "duration": 0
         }
       ],
-      "driftDwellMs": 20000
+      "driftDwellMs": 70000
     },
     {
       "id": "4.0.2",
@@ -3043,7 +3043,7 @@
           "duration": 0
         }
       ],
-      "driftDwellMs": 20000
+      "driftDwellMs": 70000
     }
   ]
 }
